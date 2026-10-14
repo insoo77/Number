@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 3.3 디리클레 정리와 L-함수</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f1f5f9; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#1e3a8a; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #60a5fa; color:#1e40af;}
+  .lead{
+    font-size:1.1rem; background:#eff6ff; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #3b82f6;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .status-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#dbeafe; color:#1e40af;
+  }
+  .problem { font-weight: 700; color: #1e293b; font-size: 1.1rem; margin-bottom: 12px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>3.3 디리클레 정리 & L-함수 실전 예제 10선</h1>
+  <div class="lead">
+    산술급수 $\{a + nd\}$ 속에 포함된 무한한 소수의 존재성과, 이를 증명하기 위한 디리클레 지표(Character) 및 L-함수의 산술적 성질을 탐구합니다.
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 1. 산술급수의 소수 정리</div>
+    <div class="problem">문제: $\gcd(a, d) = 1$일 때, 산술급수 $a, a+d, a+2d, \dots$에 무한히 많은 소수가 존재함을 증명하는 핵심 아이디어를 서술하시오.</div>
+    <div class="solution">
+      핵심은 해당 급수에 속하는 소수 $p \equiv a \pmod d$들의 역수의 합 $\sum_{p \equiv a \pmod d} \frac{1}{p}$이 발산함을 보이는 것이다. <br>
+      이를 위해 디리클레 지표 $\chi$를 도입하여 특정 잉여류의 소수들만 걸러내는 함수를 구성한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 2. 디리클레 지표의 성질</div>
+    <div class="problem">문제: 법 3에 대한 모든 디리클레 지표를 구하시오.</div>
+    <div class="solution">
+      $\phi(3) = 2$이므로 2개의 지표가 존재한다. <br>
+      1) 주지표 $\chi_0$: $\chi_0(1)=1, \chi_0(2)=1, \chi_0(3n)=0$ <br>
+      2) 비주지표 $\chi_1$: $\chi_1(1)=1, \chi_1(2)=-1, \chi_1(3n)=0$ <br>
+      모든 지표는 완전히 곱셈적(completely multiplicative)인 성질을 갖는다.
+    </div>
+  </div>
+
+  
+
+  <div class="example-box">
+    <div class="status-badge">Ex 3. L-함수의 정의와 오일러 곱</div>
+    <div class="problem">문제: L-함수 $L(s, \chi)$의 정의와 오일러 곱 형태를 제시하시오.</div>
+    <div class="solution">
+      $L(s, \chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n^s}$ <br>
+      오일러 곱 형태: $L(s, \chi) = \prod_{p} \left( 1 - \frac{\chi(p)}{p^s} \right)^{-1}$ <br>
+      이는 $\chi$가 주지표일 때 리만 제타 함수와 매우 유사한 거동을 보인다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 4. 특정 꼴의 소수 존재성</div>
+    <div class="problem">문제: $4n+3$ 꼴의 소수가 무한함을 유클리드 방식을 변형하여 증명하시오.</div>
+    <div class="solution">
+      $p_1, p_2, \dots, p_k$를 $4n+3$ 꼴의 소수들이라 가정하고, $N = 4(p_1 \dots p_k) - 1$을 구성한다. <br>
+      $N$은 $4n+3$ 꼴이다. $N$의 모든 소인수가 $4n+1$ 꼴이라면 $N$도 $4n+1$ 꼴이어야 하므로 모순이다. <br>
+      따라서 $N$은 반드시 $4n+3$ 꼴의 소인수를 가져야 하며, 이는 가정에 없는 새로운 소수이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 5. 잉여류 추출 메커니즘</div>
+    <div class="problem">문제: $\frac{1}{\phi(d)} \sum_{\chi} \overline{\chi}(a)\chi(n)$의 값이 $n \equiv a \pmod d$ 여부에 따라 어떻게 변하는지 보이시오.</div>
+    <div class="solution">
+      지표의 직교 관계에 의해: <br>
+      1) $n \equiv a \pmod d$ 이면, 값은 $1$이다. <br>
+      2) $n \not\equiv a \pmod d$ 이면, 값은 $0$이다. <br>
+      이 성질을 통해 특정 산술급수에 속하는 소수들만 합산할 수 있게 된다.
+    </div>
+  </div>
+
+  
+
+  <div class="example-box">
+    <div class="status-badge">Ex 6. 디리클레 정리의 핵심 난관</div>
+    <div class="problem">문제: 디리클레 정리 증명에서 $L(1, \chi) \neq 0$ (비주지표에 대해)임을 보이는 것이 왜 중요한지 서술하시오.</div>
+    <div class="solution">
+      소수 역수의 합에 대한 식에서 $\ln L(s, \chi)$ 항이 나타나는데, 만약 $L(1, \chi) = 0$이라면 해당 항이 주지표의 발산(소수의 무한성)을 상쇄시켜 버릴 위험이 있다. <br>
+      따라서 $L(1, \chi) \neq 0$ 임을 증명하는 것이 전체 증명의 마침표가 된다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 7. L-함수의 특수 사례</div>
+    <div class="problem">문제: 법 $p$에 대한 르장드르 기호 $\chi(n) = (\frac{n}{p})$가 디리클레 지표임을 보이시오.</div>
+    <div class="solution">
+      르장드르 기호는 $(\frac{mn}{p}) = (\frac{m}{p})(\frac{n}{p})$인 곱셈적 성질을 가지며, 주기가 $p$이므로 디리클레 지표의 정의를 완벽히 만족한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 8. 라이프니츠 급수와의 연결</div>
+    <div class="problem">문제: 법 4의 비주지표 $\chi$에 대하여 $L(1, \chi)$의 값을 구하시오.</div>
+    <div class="solution">
+      $\chi(1)=1, \chi(3)=-1$ 이므로 $L(1, \chi) = 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \dots$ <br>
+      이는 유명한 $\frac{\pi}{4}$로 수렴하는 급수이다. $0$이 아님이 명백하다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 9. 산술급수 소수의 균등 분포</div>
+    <div class="problem">문제: 법 $d$에 대해 서로소인 각 잉여류 $a_1, a_2 \dots$에 포함된 소수의 밀도는 어떠한가?</div>
+    <div class="solution">
+      디리클레 정리의 정밀한 버전(PNT for APs)에 따르면, 모든 가능한 잉여류 $a \pmod d$ ($\gcd(a,d)=1$)에 대해 소수는 거의 같은 비율($1/\phi(d)$)로 분포한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 10. 현대 수학의 확장</div>
+    <div class="problem">문제: 일반화된 리만 가설(GRH)은 무엇에 관한 가설인가?</div>
+    <div class="solution">
+      모든 디리클레 L-함수 $L(s, \chi)$의 비자명 영점들이 실수부 $\text{Re}(s) = 1/2$ 선상에 존재한다는 가설이다. 이는 산술급수 내의 소수 분포 오차를 극도로 정밀하게 예측하게 해준다.
+    </div>
+  </div>
+
+  <div class="footer">
+    산술급수 속의 소수는 수의 체계가 가진 깊은 대칭성과 조화를 보여주는 증거입니다. <br>
+    © 2026 Analytic Number Theory: Dirichlet & L-functions
+  </div>
+</div>
+</body>
+</html>

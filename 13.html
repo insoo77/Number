@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 1.2 소수와 기본정리</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #3b82f6; color:#1e3a8a;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #3b82f6; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #3b82f6;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-card {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#dbeafe; color:#1d4ed8;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>1.2 소수와 산술의 기본정리 (Primes & FTA)</h1>
+  <div class="lead">
+    소수(Prime Number)는 1보다 큰 자연수 중 1과 자기 자신만을 약수로 갖는 수입니다. 소수는 정수론의 가장 기초적인 원자이며, 모든 정수는 이들의 결합으로 설명됩니다.
+  </div>
+
+  <h2>1. 소수의 정의와 유클리드 보조정리</h2>
+  <div class="concept-card">
+    <p>정수 $p > 1$이 소수일 때, 가장 중요한 성질 중 하나는 <b>유클리드 보조정리(Euclid's Lemma)</b>입니다.</p>
+    <div class="formula-container" style="background:#1e3a8a;">
+      $$p \mid ab \implies p \mid a \text{ 또는 } p \mid b$$
+    </div>
+    <p>이 성질은 소수가 합성수와 구별되는 결정적인 특징이며, 소인수분해의 유일성을 증명하는 핵심 도구가 됩니다.</p>
+  </div>
+
+  
+
+  <h2>2. 소수의 무한성 (Infinitude of Primes)</h2>
+  <p>유클리드는 귀류법을 통해 소수가 무한히 존재함을 증명했습니다.</p>
+  <div class="concept-card">
+    <div class="badge">Proof Sketch</div>
+    <ol>
+      <li>소수가 유한개($p_1, p_2, \dots, p_n$)라고 가정합니다.</li>
+      <li>모든 소수의 곱에 1을 더한 수 $N = (p_1 p_2 \dots p_n) + 1$을 만듭니다.</li>
+      <li>$N$은 기존의 어떤 소수로 나누어도 나머지가 1이 남습니다.</li>
+      <li>따라서 $N$ 자체가 소수이거나, 목록에 없는 새로운 소수를 약수로 가져야 합니다.</li>
+      <li>이는 가정에 모순이므로 소수는 <b>무한</b>합니다.</li>
+    </ol>
+  </div>
+
+  <h2>3. 산술의 기본정리 (Fundamental Theorem of Arithmetic)</h2>
+  <div class="concept-card" style="border-left: 5px solid #3b82f6;">
+    <p>1보다 큰 모든 정수는 소수들의 곱으로 나타낼 수 있으며, 이 표현은 소수들의 순서를 무시하면 <b>유일(Unique)</b>합니다.</p>
+    <div class="formula-container">
+      $$n = p_1^{a_1} p_2^{a_2} \dots p_k^{a_k}$$
+    </div>
+    <p>이 정리는 두 단계로 증명됩니다.</p>
+    <ul>
+      <li><b>존재성(Existence):</b> 강한 수학적 귀납법을 통해 증명.</li>
+      <li><b>유일성(Uniqueness):</b> 위에서 언급한 유클리드 보조정리를 통해 증명.</li>
+    </ul>
+  </div>
+
+  [Image showing the prime factorization tree for a composite number]
+
+  <h2>4. 소수 정리 (Prime Number Theorem)</h2>
+  <p>소수의 정확한 분포를 알 수는 없지만, $x$보다 작은 소수의 개수 $\pi(x)$의 근사적 분포는 다음과 같습니다.</p>
+  <div class="formula-container">
+    $$\pi(x) \approx \frac{x}{\ln x}$$
+  </div>
+
+  <div class="footer">
+    산술의 기본정리는 우리가 숫자를 다루는 모든 방식의 논리적 토대입니다. <br>
+    © 2026 Number Theory Study Guide
+  </div>
+</div>
+</body>
+</html>

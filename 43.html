@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 4.2 아이디얼 이론</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#be123c; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #fb7185; color:#881337;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #fb7185; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#fff1f2,#ffe4e6);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #be123c;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-card {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#ffe4e6; color:#be123c;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>4.2 아이디얼 이론 (Ideal Theory)</h1>
+  <div class="lead">
+    일반적인 정수환에서 소인수분해의 유일성이 깨지는 문제를 해결하기 위해 도입된 <b>아이디얼(Ideal)</b>은 현대 대수학의 초석이 되었습니다.
+  </div>
+
+  <h2>1. 유일분해의 실패 (Failure of Unique Factorization)</h2>
+  <div class="concept-card">
+    <p>정수환 $\mathbb{Z}$에서는 $6 = 2 \times 3$으로 유일하게 분해되지만, 확장된 수체 $K = \mathbb{Q}(\sqrt{-5})$의 정수환 $\mathcal{O}_K = \mathbb{Z}[\sqrt{-5}]$에서는 다음과 같은 현상이 발생합니다.</p>
+    <div class="formula-container">
+      $$6 = 2 \cdot 3 = (1 + \sqrt{-5})(1 - \sqrt{-5})$$
+    </div>
+    <p>여기서 $2, 3, 1 \pm \sqrt{-5}$는 모두 더 이상 쪼개지지 않는 <b>기약 원소(Irreducible element)</b>입니다. 즉, 하나의 숫자가 서로 다른 두 방식으로 인수분해되어 산술의 기본 정리가 붕괴됩니다.</p>
+  </div>
+
+   diagram]
+
+  <h2>2. 아이디얼을 통한 해결 (Ideal Numbers)</h2>
+  <div class="concept-card" style="border-left: 5px solid #be123c;">
+    <p>데데킨트는 숫자가 아닌 <b>아이디얼(집합)</b> 단위로 생각하면 분해의 유일성이 회복됨을 증명했습니다. 위 예시의 숫자 6을 아이디얼 $(6)$으로 보면, 다음과 같은 <b>소아이디얼(Prime Ideal)</b>들의 곱으로 유일하게 분해됩니다.</p>
+    <div class="formula-container" style="background:#881337;">
+      $$(6) = \mathfrak{p}^2 \cdot \mathfrak{q} \cdot \bar{\mathfrak{q}}$$
+    </div>
+    <p>숫자 수준에서는 보이지 않던 '숨겨진 소인수'들이 집합(아이디얼) 수준에서는 명확히 드러나는 것입니다.</p>
+  </div>
+
+  <h2>3. 소아이디얼 (Prime Ideal)</h2>
+  <div class="concept-card">
+    <p>정수론의 '소수' 개념을 일반화한 것이 소아이디얼입니다.</p>
+    <div class="badge">Definition</div>
+    <p>아이디얼 $\mathfrak{p} \subsetneq \mathcal{O}_K$가 다음 성질을 만족할 때 소아이디얼이라 합니다:</p>
+    <blockquote>
+      $ab \in \mathfrak{p}$ 이면, $a \in \mathfrak{p}$ 또는 $b \in \mathfrak{p}$ 이다.
+    </blockquote>
+    <p><b>데데킨트 정역(Dedekind Domain)</b>에서 모든 0이 아닌 아이디얼은 소아이디얼들의 곱으로 유일하게 표현됩니다. 이로써 산술의 기본 정리는 아이디얼 세계에서 부활합니다.</p>
+  </div>
+
+  
+
+  <h2>4. 유수 (Class Number)</h2>
+  <div class="concept-card">
+    <p>모든 아이디얼이 숫자 하나로 표현되는(주아이디얼) 체계라면 유일분해가 성립합니다. 하지만 그렇지 않은 경우, 그 '어긋난 정도'를 측정하는 지표가 바로 <b>유수(Class Number, $h_K$)</b>입니다.</p>
+    <ul>
+      <li>$h_K = 1$: 모든 아이디얼이 주아이디얼이며, 유일분해가 성립함.</li>
+      <li>$h_K > 1$: 유일분해가 성립하지 않음.</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    아이디얼 이론은 '보이지 않는 이상적인 수'를 통해 수의 본질을 꿰뚫는 통찰을 제공합니다. <br>
+    © 2026 Algebraic Number Theory: Ideal & Factorization
+  </div>
+</div>
+</body>
+</html>

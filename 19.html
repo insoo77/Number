@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 1.5 이차잉여와 상호법칙</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#1e1b4b; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #10b981; color:#064e3b;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #10b981; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#f0fdf4,#dcfce7);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #10b981;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-card {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#dcfce7; color:#15803d;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>1.5 이차잉여 (Quadratic Residues)</h1>
+  <div class="lead">
+    이차잉여는 방정식 $x^2 \equiv a \pmod p$의 해가 존재하는지를 다룹니다. 이는 정수론의 가장 아름다운 정리 중 하나인 <b>이차 상호 법칙</b>으로 이어집니다.
+  </div>
+
+  <h2>1. 이차잉여의 정의와 르장드르 기호</h2>
+  <div class="concept-card">
+    <p>홀수인 소수 $p$와 $\gcd(a, p)=1$인 정수 $a$에 대하여, $x^2 \equiv a \pmod p$를 만족하는 정수 $x$가 존재하면 $a$를 <b>이차잉여(QR)</b>, 존재하지 않으면 <b>이차비잉여(QNR)</b>라고 합니다.</p>
+    <div class="badge">Legendre Symbol</div>
+    <div class="formula-container" style="background:#064e3b;">
+      $$\left( \frac{a}{p} \right) = \begin{cases} 1 & \text{if } a \text{ is a quadratic residue mod } p \\ -1 & \text{if } a \text{ is a quadratic non-residue mod } p \\ 0 & \text{if } p \mid a \end{cases}$$
+    </div>
+  </div>
+
+  
+
+  <h2>2. 오일러 판정법 (Euler's Criterion)</h2>
+  <p>르장드르 기호의 값을 실제로 계산할 수 있게 해주는 강력한 도구입니다.</p>
+  <div class="concept-card">
+    <div class="formula-container">
+      $$\left( \frac{a}{p} \right) \equiv a^{(p-1)/2} \pmod p$$
+    </div>
+    <p><b>성질:</b> $\left( \frac{ab}{p} \right) = \left( \frac{a}{p} \right) \left( \frac{b}{p} \right)$ 이 성립하며, 이는 르장드르 기호가 곱셈적(multiplicative)임을 보여줍니다.</p>
+  </div>
+
+  <h2>3. 이차 상호 법칙 (Law of Quadratic Reciprocity)</h2>
+  <p>가우스가 "수학의 여왕의 보석"이라 칭송한 이 정리는 두 소수 $p, q$ 사이의 이차잉여 관계를 연결합니다.</p>
+  <div class="concept-card" style="border-left: 5px solid #10b981;">
+    <p>서로 다른 홀수 소수 $p, q$에 대하여 다음이 성립합니다.</p>
+    <div class="formula-container">
+      $$\left( \frac{p}{q} \right) \left( \frac{q}{p} \right) = (-1)^{\frac{p-1}{2} \cdot \frac{q-1}{2}}$$
+    </div>
+    <p>즉, $p$와 $q$가 모두 $4n+3$ 꼴인 경우에만 두 기호의 값이 반대이고, 그 외에는 같습니다.</p>
+  </div>
+
+  
+
+  <h2>4. 제1, 제2 보충 법칙</h2>
+  <div class="concept-card">
+    <p><b>제1 보충 법칙:</b> $\left( \frac{-1}{p} \right) = (-1)^{(p-1)/2}$ ($p \equiv 1 \pmod 4$ 이면 1)</p>
+    <p><b>제2 보충 법칙:</b> $\left( \frac{2}{p} \right) = (-1)^{(p^2-1)/8}$ ($p \equiv 1, 7 \pmod 8$ 이면 1)</p>
+  </div>
+
+  <div class="footer">
+    이차 상호 법칙은 현대 정수론의 거대한 줄기인 '랑글랜즈 프로그램'의 시초가 됩니다. <br>
+    © 2026 Number Theory: Quadratic Residue Studies
+  </div>
+</div>
+</body>
+</html>

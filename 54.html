@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 5.2 모듈러 형식과 헤케 연산자 실전 예제</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f1f5f9; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#c026d3; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #e879f9; color:#701a75;}
+  .lead{
+    font-size:1.1rem; background:#fdf4ff; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #d946ef;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .status-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#fae8ff; color:#c026d3;
+  }
+  .problem { font-weight: 700; color: #1e293b; font-size: 1.1rem; margin-bottom: 12px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>5.2 모듈러 형식 & 헤케 연산자 실전 예제 10선</h1>
+  <div class="lead">
+    상반평면에서의 모듈러 변환 대칭성과 푸리에 계수 $a_n$들 사이의 산술적 관계를 규명하는 헤케 연산자의 성질을 예제를 통해 탐구합니다.
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 1. 기본 영역(Fundamental Domain)</div>
+    <div class="problem">문제: $SL_2(\mathbb{Z})$의 생성원 $S = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$와 $T = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$가 상반평면의 점 $z$에 작용하는 방식을 쓰시오.</div>
+    <div class="solution">
+      뫼비우스 변환 정의에 따라: <br>
+      $T(z) = z+1$ (수평 이동) <br>
+      $S(z) = -1/z$ (단위 원에 대한 반전 및 대칭) <br>
+      이 두 변환은 모듈러 형식의 대칭성을 결정하는 핵심 연산이다.
+    </div>
+  </div>
+
+  
+
+  <div class="example-box">
+    <div class="status-badge">Ex 2. Eisenstein Series의 계수</div>
+    <div class="problem">문제: 가중치 $k$인 아이젠슈타인 급수 $E_k(z)$의 $n$번째 푸리에 계수 $a_n$이 약수 함수 $\sigma_{k-1}(n)$에 비례함을 보이시오.</div>
+    <div class="solution">
+      $E_k(z)$의 정의상 합을 정리하면 $a_n = \frac{2(2\pi i)^k}{(k-1)! \zeta(k)} \sigma_{k-1}(n)$ 형태가 된다. <br>
+      이는 모듈러 형식이 정수론의 약수 구조를 내포하고 있음을 보여주는 가장 직접적인 예시다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 3. 델타 함수의 정의</div>
+    <div class="problem">문제: $\Delta(z) = \eta(z)^{24} = q \prod_{n=1}^{\infty} (1-q^n)^{24}$가 가중치 12인 커스프 형식임을 설명하시오.</div>
+    <div class="solution">
+      $\Delta(z)$는 무한대점($q=0$)에서 $a_0 = 0$이므로 커스프 형식이다. <br>
+      또한 $E_4^3$과 $E_6^2$의 선형 결합으로 표현 가능하며, 판별식 함수로서 모듈러 형식 공간의 차원을 결정하는 데 중요한 역할을 한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 4. $T_n$의 작용 정의</div>
+    <div class="problem">문제: 가중치 $k$인 모듈러 형식 $f$에 대해 $T_p$ ($p$는 소수)의 푸리에 계수 $b_n$을 $f$의 계수 $a_n$으로 표현하시오.</div>
+    <div class="solution">
+      $b_n = a_{pn} + p^{k-1} a_{n/p}$ 이다. <br>
+      단, $n$이 $p$로 나누어지지 않으면 $a_{n/p} = 0$으로 간주한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 5. 고윳값과 계수의 관계</div>
+    <div class="problem">문제: $f$가 모든 $T_n$에 대한 고유 함수이고 $T_n f = \lambda_n f$ 라면, $a_n$과 $\lambda_n$의 관계는?</div>
+    <div class="solution">
+      첫 번째 계수 $a_1 = 1$로 정규화(normalized)했다면, $\lambda_n = a_n$이 성립한다. <br>
+      즉, 고유 함수의 푸리에 계수 자체가 헤케 연산자의 고윳값이 된다.
+    </div>
+  </div>
+
+  
+
+  <div class="example-box">
+    <div class="status-badge">Ex 6. 계수의 산술적 성질</div>
+    <div class="problem">문제: 정규화된 헤케 고유 형식 $f$에 대해 $\gcd(m, n) = 1$이면 $a_{mn} = a_m a_n$임을 증명하는 논리를 쓰시오.</div>
+    <div class="solution">
+      헤케 연산자들 사이의 가환성($T_m T_n = T_n T_m = T_{mn}$)으로부터 도출된다. <br>
+      이는 모듈러 형식이 오일러 곱(Euler Product) 형태의 L-함수를 가짐을 보장한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 7. Ramanujan's Conjecture</div>
+    <div class="problem">문제: $\Delta(z)$의 계수 $\tau(n)$에 대해 $\tau(p^2)$을 $\tau(p)$로 나타내시오. (가중치 12)</div>
+    <div class="solution">
+      헤케 연산자 관계식 $T_p^2 = T_{p^2} + p^{k-1} I$를 이용한다. <br>
+      $a_p^2 = a_{p^2} + p^{11} \implies \tau(p^2) = \tau(p)^2 - p^{11}$.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 8. 차원 공식 (Dimension Formula)</div>
+    <div class="problem">문제: 가중치 $k=2$인 $SL_2(\mathbb{Z})$에 대한 모듈러 형식 공간 $M_2$의 차원은 얼마인가?</div>
+    <div class="solution">
+      가중치 $k < 4$인 경우($k=0$ 제외) 정규 모듈러 형식 공간의 차원은 0이다. <br>
+      단, $k=4, 6, 8, 10, 14$ 등에서는 차원이 1이며 각각 아이젠슈타인 급수로 생성된다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 9. Mellin Transform</div>
+    <div class="problem">문제: 모듈러 형식 $f$의 L-함수 $L(s, f) = \sum a_n n^{-s}$가 만족하는 함수 방정식을 기술하시오.</div>
+    <div class="solution">
+      모듈러 변환 $z \to -1/z$의 대칭성으로 인해, 완비 L-함수 $\Lambda(s, f) = (2\pi)^{-s} \Gamma(s) L(s, f)$는 $s \to k-s$에 대해 대칭적인 함수 방정식을 만족한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 10. 헤케 연산자의 자기수반성</div>
+    <div class="problem">문제: 헤케 연산자 $T_n$이 커스프 형식 공간 위에서 Petersson 내적에 대해 자기수반(self-adjoint)임을 설명하시오.</div>
+    <div class="solution">
+      $\langle T_n f, g \rangle = \langle f, T_n g \rangle$이 성립하며, 이는 헤케 고유 형식들이 서로 직교하는 기저를 형성함을 의미한다. <br>
+      또한 이 성질은 고윳값(푸리에 계수)이 항상 실수임을 보장한다.
+    </div>
+  </div>
+
+  <div class="footer">
+    모듈러 형식은 고도의 기하학적 대칭성을 통해 정수의 심오한 산술적 질서를 드러내는 통로입니다. <br>
+    © 2026 Arithmetic of Modular Forms & Hecke Algebra
+  </div>
+</div>
+</body>
+</html>

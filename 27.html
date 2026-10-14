@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 2.4 원시근과 순환군</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#1e1b4b; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #f59e0b; color:#78350f;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #f59e0b; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#fffbeb,#fef3c7);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #f59e0b;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-card {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#fef3c7; color:#b45309;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>2.4 원시근과 순환군 (Primitive Roots)</h1>
+  <div class="lead">
+    원시근은 모듈러 군 $(\mathbb{Z}/n\mathbb{Z})^\times$의 모든 원소를 자신의 거듭제곱으로 생성할 수 있는 특별한 원소입니다. 이는 <b>이산 로그(Discrete Logarithm)</b> 문제의 기초가 됩니다.
+  </div>
+
+  <h2>1. 위수(Order)와 원시근의 정의</h2>
+  <div class="concept-card">
+    <p>$\gcd(a, n)=1$일 때, $a^k \equiv 1 \pmod n$을 만족하는 최소의 양의 정수 $k$를 <b>법 $n$에 대한 $a$의 위수</b>라 하고 $\text{ord}_n(a)$로 표기합니다.</p>
+    <div class="badge">Primitive Root Definition</div>
+    <p>어떤 정수 $g$의 위수가 $\phi(n)$과 정확히 일치할 때, $g$를 법 $n$에 대한 <b>원시근</b>이라 합니다.</p>
+    <div class="formula-container">
+      $$\text{ord}_n(g) = \phi(n)$$
+    </div>
+  </div>
+
+  
+
+  <h2>2. 원시근이 존재할 조건</h2>
+  <div class="concept-card" style="border-left: 5px solid #f59e0b;">
+    <p>모든 정수 $n$에 대해 원시근이 존재하는 것은 아닙니다. 오직 다음의 형태에서만 원시근이 존재합니다.</p>
+    <ul>
+      <li>$n = 2, 4$</li>
+      <li>$n = p^k$ ($p$는 홀수인 소수, $k \ge 1$)</li>
+      <li>$n = 2p^k$ ($p$는 홀수인 소수, $k \ge 1$)</li>
+    </ul>
+    <p>이 경우 곱셈군 $(\mathbb{Z}/n\mathbb{Z})^\times$는 <b>순환군(Cyclic Group) $C_{\phi(n)}$</b>과 동형입니다.</p>
+  </div>
+
+  <h2>3. 원시근의 개수와 성질</h2>
+  <div class="concept-card">
+    <ul>
+      <li>법 $n$에 원시근이 존재한다면, 그 개수는 정확히 <b>$\phi(\phi(n))$</b>개입니다.</li>
+      <li>$g$가 원시근이면, $g^k$가 원시근일 필요충분조건은 $\gcd(k, \phi(n)) = 1$인 것입니다.</li>
+      <li>라그랑주 정리: 소수 $p$에 대해 법 $p$인 $n$차 합동식은 최대 $n$개의 해를 갖습니다. 이로부터 모든 소수 $p$에 대해 원시근이 존재함이 유도됩니다.</li>
+    </ul>
+  </div>
+
+  
+
+  <h2>4. 이산 로그 (Discrete Logarithm)</h2>
+  <div class="concept-card">
+    <p>원시근 $g$가 주어졌을 때, 임의의 $a \in (\mathbb{Z}/n\mathbb{Z})^\times$에 대해 $g^x \equiv a \pmod n$을 만족하는 $x$를 찾는 문제입니다. 실수가 아닌 모듈러 세계의 로그이며, 현대 암호(Diffie-Hellman 등)의 안전성을 보장하는 난제입니다.</p>
+  </div>
+
+  <div class="footer">
+    원시근은 무질서해 보이는 나머지들의 세계에 '순서'와 '순환'이라는 아름다운 구조를 부여합니다. <br>
+    © 2026 Number Theory: Primitive Root & Group Structure
+  </div>
+</div>
+</body>
+</html>

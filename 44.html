@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 4.2 아이디얼 이론과 유일분해</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f1f5f9; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#9d174d; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #f472b6; color:#831843;}
+  .lead{
+    font-size:1.1rem; background:#fff1f2; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #f472b6;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .status-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#fce7f3; color:#9d174d;
+  }
+  .problem { font-weight: 700; color: #1e293b; font-size: 1.1rem; margin-bottom: 12px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>4.2 아이디얼 이론 & 유일분해의 회복</h1>
+  <div class="lead">
+    데데킨트 정역(Dedekind Domain)에서 모든 0이 아닌 아이디얼은 소아이디얼들의 곱으로 유일하게 분해됩니다. 숫자 수준에서의 혼란을 집합 수준에서의 질서로 바로잡는 과정을 학습합니다.
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 1. UFD의 붕괴</div>
+    <div class="problem">문제: $\mathbb{Z}[\sqrt{-5}]$에서 $6 = 2 \cdot 3 = (1+\sqrt{-5})(1-\sqrt{-5})$가 서로 다른 인수분해임을 보이시오.</div>
+    <div class="solution">
+      노름 $N(a+b\sqrt{-5}) = a^2 + 5b^2$을 사용한다. <br>
+      $N(2)=4, N(3)=9, N(1 \pm \sqrt{-5})=6$이다. <br>
+      노름이 2나 3인 원소가 존재하지 않으므로($a^2+5b^2=2, 3$의 정수해 없음), 위 원소들은 모두 기약(irreducible)이다. <br>
+      상수(unit) 배 관계가 아니므로 두 분해는 본질적으로 다르다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 2. 생성된 아이디얼</div>
+    <div class="problem">문제: $\mathbb{Z}[\sqrt{-5}]$에서 $\mathfrak{p} = (2, 1+\sqrt{-5})$가 주아이디얼(principal ideal)이 아님을 증명하시오.</div>
+    <div class="solution">
+      만약 $\mathfrak{p} = (\alpha)$라면, $N(\alpha)$는 $\gcd(N(2), N(1+\sqrt{-5})) = \gcd(4, 6) = 2$여야 한다. <br>
+      그러나 $a^2 + 5b^2 = 2$를 만족하는 정수 $a, b$는 존재하지 않는다. <br>
+      따라서 $\mathfrak{p}$를 생성하는 단일 원소 $\alpha$는 존재할 수 없다.
+    </div>
+  </div>
+
+  ]
+
+  <div class="example-box">
+    <div class="status-badge">Ex 3. 소아이디얼 판정</div>
+    <div class="problem">문제: 환 $R$의 아이디얼 $\mathfrak{p}$가 소아이디얼일 필요충분조건은 잉여환 $R/\mathfrak{p}$가 정역(integral domain)임을 증명하시오.</div>
+    <div class="solution">
+      $\mathfrak{p}$가 소아이디얼 $\iff (ab \in \mathfrak{p} \implies a \in \mathfrak{p} \text{ or } b \in \mathfrak{p})$ <br>
+      $\iff ( \bar{a}\bar{b} = \bar{0} \text{ in } R/\mathfrak{p} \implies \bar{a} = \bar{0} \text{ or } \bar{b} = \bar{0} )$ <br>
+      이것은 정역의 정의와 정확히 일치한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 4. 아이디얼 곱의 계산</div>
+    <div class="problem">문제: $\mathfrak{p} = (2, 1+\sqrt{-5})$일 때, $\mathfrak{p}^2 = (2)$임을 보이시오.</div>
+    <div class="solution">
+      $\mathfrak{p}^2 = (2, 1+\sqrt{-5})(2, 1+\sqrt{-5}) = (4, 2+2\sqrt{-5}, (1+\sqrt{-5})^2)$ <br>
+      $= (4, 2+2\sqrt{-5}, -4+2\sqrt{-5}) = (4, 2+2\sqrt{-5}, -6)$ <br>
+      $\gcd(4, -6) = 2$를 포함하므로 $(2) \subseteq \mathfrak{p}^2$이고, 모든 생성원이 2의 배수이므로 $\mathfrak{p}^2 = (2)$이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 5. 분해의 일치성</div>
+    <div class="problem">문제: $(6) = (2)(3)$과 $(6) = (1+\sqrt{-5})(1-\sqrt{-5})$가 아이디얼 분해로서 어떻게 같은지 설명하시오.</div>
+    <div class="solution">
+      $\mathfrak{p}=(2, 1+\sqrt{-5}), \mathfrak{q}=(3, 1+\sqrt{-5}), \bar{\mathfrak{q}}=(3, 1-\sqrt{-5})$라 하면 <br>
+      $(2) = \mathfrak{p}^2$, $(3) = \mathfrak{q}\bar{\mathfrak{q}}$, $(1+\sqrt{-5}) = \mathfrak{p}\mathfrak{q}$, $(1-\sqrt{-5}) = \mathfrak{p}\bar{\mathfrak{q}}$이다. <br>
+      양쪽 분해 모두 아이디얼 수준에서는 $\mathfrak{p}^2 \mathfrak{q} \bar{\mathfrak{q}}$로 귀결된다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 6. 극대 아이디얼은 소아이디얼</div>
+    <div class="problem">문제: 가환환에서 모든 극대 아이디얼(Maximal Ideal)은 소아이디얼임을 증명하시오.</div>
+    <div class="solution">
+      $\mathfrak{m}$이 극대 아이디얼이면 $R/\mathfrak{m}$은 체(Field)이다. <br>
+      모든 체는 정역이므로, 예제 3에 의해 $\mathfrak{m}$은 소아이디얼이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 7. 아이디얼의 노름</div>
+    <div class="problem">문제: 아이디얼 $\mathfrak{a}$의 노름 $N(\mathfrak{a}) = |\mathcal{O}_K / \mathfrak{a}|$일 때, $N(\mathfrak{p}) = 2$이면 $\mathfrak{p}$는 소아이디얼임을 보이시오.</div>
+    <div class="solution">
+      $N(\mathfrak{p})=2$는 소수이므로 $\mathcal{O}_K/\mathfrak{p}$는 위수가 2인 유한체 $\mathbb{F}_2$와 동형이다. <br>
+      체는 정역이므로 $\mathfrak{p}$는 소아이디얼(심지어 극대 아이디얼)이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 8. PID와 UFD</div>
+    <div class="problem">문제: 정수환 $\mathcal{O}_K$가 주아이디얼 정역(PID)이면 유일 인수분해 정역(UFD)임을 보이시오.</div>
+    <div class="solution">
+      데데킨트 정역에서 모든 아이디얼이 주아이디얼이면, 소아이디얼 분해는 곧 원소의 소인수분해와 직결된다. <br>
+      따라서 아이디얼의 유일 분해성이 원소의 유일 분해성을 보장하게 된다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 9. 소아이디얼의 분해 형태</div>
+    <div class="problem">문제: 법 $p$에 대해 $x^2 + 5 \equiv 0 \pmod p$의 해가 없을 때, $(p)$는 $\mathbb{Z}[\sqrt{-5}]$에서 어떤 아이디얼이 되는가?</div>
+    <div class="solution">
+      다항식 $x^2+5$가 $\mathbb{F}_p$ 위에서 기약이므로, $(p)$는 분해되지 않고 그 자체로 $\mathcal{O}_K$의 소아이디얼로 남는다. 이를 불활(inert) 소수라 한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 10. 데데킨트 정역의 특징</div>
+    <div class="problem">문제: 데데킨트 정역이 되기 위한 세 가지 대수적 조건을 서술하시오.</div>
+    <div class="solution">
+      1) 뇌터 환(Noetherian ring)일 것. <br>
+      2) 정수적으로 닫혀 있을 것(Integrally closed). <br>
+      3) 모든 0이 아닌 소아이디얼이 극대 아이디얼일 것. <br>
+      수체의 정수환 $\mathcal{O}_K$는 항상 이 조건들을 만족한다.
+    </div>
+  </div>
+
+  <div class="footer">
+    아이디얼은 '이상적인 숫자'로서, 수의 세계에서 잃어버린 질서를 되찾아주는 등불입니다. <br>
+    © 2026 Algebraic Number Theory: Ideal Theory & Dedekind Domains
+  </div>
+</div>
+</body>
+</html>

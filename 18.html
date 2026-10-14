@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 1.4 오일러 & 페르마 정리 예제</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f1f5f9; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#1e1b4b; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #6366f1; color:#312e81;}
+  .lead{
+    font-size:1.1rem; background:#eef2ff; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #6366f1;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .status-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#e0e7ff; color:#4338ca;
+  }
+  .problem { font-weight: 700; color: #1e293b; font-size: 1.1rem; margin-bottom: 12px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .step-title { font-weight: 700; color: #4338ca; margin-top: 10px; display: block; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>1.4 오일러 & 페르마 정리 실전 예제 10선</h1>
+  <div class="lead">
+    지수 감소의 마법인 $a^{\phi(m)} \equiv 1 \pmod m$을 활용하여 거대 지수 연산과 모듈러 역원을 구하는 과정을 상세히 풀이합니다.
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 1. 페르마 소정리와 지수 감소</div>
+    <div class="problem">문제: $3^{202} \pmod{101}$ 의 값을 구하시오. (단, 101은 소수)</div>
+    <div class="solution">
+      $p=101$은 소수이고 $\gcd(3, 101)=1$이므로 페르마 소정리에 의해: <br>
+      $3^{100} \equiv 1 \pmod{101}$ <br>
+      $3^{202} = (3^{100})^2 \times 3^2 \equiv 1^2 \times 9 = 9 \pmod{101}$ <br>
+      $\therefore$ 답은 9이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 2. 오일러 파이 함수 실전</div>
+    <div class="problem">문제: $\phi(72)$를 구하고, 그 의미를 서술하시오.</div>
+    <div class="solution">
+      $72 = 2^3 \times 3^2$ 이다. <br>
+      $\phi(72) = 72 \left(1 - \frac{1}{2}\right) \left(1 - \frac{1}{3}\right) = 72 \times \frac{1}{2} \times \frac{2}{3} = 24$ <br>
+      의미: 1부터 72까지의 정수 중 72와 서로소인 정수는 정확히 24개 존재한다.
+    </div>
+  </div>
+
+  
+
+  <div class="example-box">
+    <div class="status-badge">Ex 3. 오일러 정리 응용</div>
+    <div class="problem">문제: $7^{100} \pmod{48}$ 의 값을 구하시오.</div>
+    <div class="solution">
+      $\gcd(7, 48)=1$ 이다. <br>
+      $48 = 2^4 \times 3 \implies \phi(48) = 48 \times \frac{1}{2} \times \frac{2}{3} = 16$ <br>
+      오일러 정리에 의해 $7^{16} \equiv 1 \pmod{48}$ 이다. <br>
+      $100 = 16 \times 6 + 4$ 이므로, $7^{100} \equiv (7^{16})^6 \times 7^4 \equiv 1^6 \times 7^4 \pmod{48}$ <br>
+      $7^2 = 49 \equiv 1 \pmod{48}$ 이므로 $7^4 \equiv 1^2 = 1 \pmod{48}$ <br>
+      $\therefore$ 답은 1이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 4. 마지막 두 자리수 (Mod 100)</div>
+    <div class="problem">문제: $3^{1000}$ 의 마지막 두 자릿수를 구하시오.</div>
+    <div class="solution">
+      마지막 두 자리는 법 100에 대한 나머지를 구하는 것과 같다. <br>
+      $\gcd(3, 100)=1$ 이고 $\phi(100) = 100(1-1/2)(1-1/5) = 40$ <br>
+      오일러 정리에 의해 $3^{40} \equiv 1 \pmod{100}$ <br>
+      $3^{1000} = (3^{40})^{25} \equiv 1^{25} = 1 \pmod{100}$ <br>
+      $\therefore$ 마지막 두 자리는 01이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 5. 곱셈군에서의 역원</div>
+    <div class="problem">문제: $5x \equiv 1 \pmod{12}$ 를 만족하는 $x$를 오일러 정리를 이용해 구하시오.</div>
+    <div class="solution">
+      $\gcd(5, 12)=1$ 이고 $\phi(12) = 12(1/2)(2/3) = 4$ <br>
+      오일러 정리에 의해 $5^{\phi(12)} = 5^4 \equiv 1 \pmod{12}$ <br>
+      따라서 $5 \times 5^3 \equiv 1 \pmod{12}$ 이므로 $x \equiv 5^3 \pmod{12}$ <br>
+      $5^3 = 125 = 12 \times 10 + 5 \equiv 5 \pmod{12}$ <br>
+      $\therefore x \equiv 5 \pmod{12}$
+    </div>
+  </div>
+
+  
+
+  <div class="example-box">
+    <div class="status-badge">Ex 6. 지수 위의 지수 연산</div>
+    <div class="problem">문제: $7^{7^7} \pmod{10}$ 의 값을 구하시오.</div>
+    <div class="solution">
+      $\gcd(7, 10)=1$ 이고 $\phi(10) = 4$ 이다. <br>
+      따라서 $7^k \pmod{10}$ 을 구할 때 지수 $k$는 법 4에 대해 생각한다. <br>
+      지수 $7^7 \pmod 4$: $7 \equiv -1 \pmod 4 \implies 7^7 \equiv (-1)^7 = -1 \equiv 3 \pmod 4$ <br>
+      $\therefore 7^{7^7} \equiv 7^3 \pmod{10}$ <br>
+      $7^3 = 343 \equiv 3 \pmod{10}$ <br>
+      $\therefore$ 답은 3이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 7. 증명 - $n^{13} - n$ 은 항상 2730의 배수인가?</div>
+    <div class="problem">문제: 모든 정수 $n$에 대해 $13 \mid (n^{13} - n)$ 임을 보이시오.</div>
+    <div class="solution">
+      페르마의 소정리 변형인 $n^p \equiv n \pmod p$를 이용한다. <br>
+      $p=13$은 소수이므로, 임의의 정수 $n$에 대해 $n^{13} \equiv n \pmod{13}$ 이 성립한다. <br>
+      따라서 $n^{13} - n$은 항상 13으로 나누어 떨어진다. (2730은 $2 \times 3 \times 5 \times 7 \times 13$ 이므로 각 소수별로 증명하면 전체 증명이 가능함)
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 8. 윌슨의 정리와 소수</div>
+    <div class="problem">문제: 소수 $p$에 대해 $(p-1)! \equiv -1 \pmod p$ 임을 이용해 $6! \pmod 7$을 구하시오.</div>
+    <div class="solution">
+      $p=7$은 소수이다. 윌슨의 정리에 의해 $(7-1)! = 6! \equiv -1 \pmod 7$ 이다. <br>
+      $-1 \equiv 6 \pmod 7$ 이므로 나머지는 6이다. <br>
+      이는 곱셈군 $\{1, 2, 3, 4, 5, 6\}$ 에서 자기 자신의 역원인 원소($1, 6$)를 제외한 나머지들이 쌍을 이루어 곱이 1이 되기 때문이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 9. 오일러 정리의 기하학적 의미</div>
+    <div class="problem">문제: $n > 1$ 일 때, $n$과 서로소인 $n$ 미만 모든 정수의 합은 $\frac{n \phi(n)}{2}$ 임을 보이시오.</div>
+    <div class="solution">
+      $\gcd(a, n)=1$ 이면 $\gcd(n-a, n)=1$ 임을 이용한다. <br>
+      서로소인 수들을 $x_1, x_2, \dots, x_{\phi(n)}$ 이라 하면, 이들을 거꾸로 나열한 $n-x_i$들도 같은 집합이다. <br>
+      $2S = (x_1 + (n-x_1)) + (x_2 + (n-x_2)) + \dots = n \times \phi(n)$ <br>
+      $\therefore S = \frac{n \phi(n)}{2}$
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 10. 공개키 암호 원리</div>
+    <div class="problem">문제: $p=3, q=11, e=3$ 일 때, $M^e \equiv C \pmod{pq}$ 에서 암호문 $C=8$을 복호화하기 위한 지수 $d$를 구하시오.</div>
+    <div class="solution">
+      $n = 33, \phi(n) = (3-1)(11-1) = 20$ <br>
+      복호화 지수 $d$는 $ed \equiv 1 \pmod{\phi(n)}$ 을 만족해야 한다. <br>
+      $3d \equiv 1 \pmod{20} \implies 3d = 21 \implies d = 7$ <br>
+      복호화 과정: $M \equiv 8^7 \pmod{33} \dots$ (오일러 정리에 의해 원래 메시지 복원 가능)
+    </div>
+  </div>
+
+  <div class="footer">
+    오일러와 페르마의 정리는 거대한 수의 바다에서 '주기'라는 등대를 찾는 과정입니다. <br>
+    © 2026 Number Theory: Modular Power Studies
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 5.1 타원곡선과 모델 정리</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f1f5f9; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#1e40af; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #3b82f6; color:#1e3a8a;}
+  .lead{
+    font-size:1.1rem; background:#eff6ff; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #3b82f6;
+  }
+  .concept-card {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#dbeafe; color:#1e40af;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>5.1 타원곡선(Elliptic Curves) & 모델 정리</h1>
+  <div class="lead">
+    유리수체 위에서 정의된 타원곡선 $E(\mathbb{Q})$는 기하학적 덧셈을 통해 <b>유한 생성 아벨 군</b>을 형성하며, 이는 정수론에서 가장 깊이 있는 연구 대상 중 하나입니다.
+  </div>
+
+  <h2>1. 타원곡선의 정의와 바이어슈트라스 표준형</h2>
+  <div class="concept-card">
+    <p>일반적으로 타원곡선은 다음과 같은 형태의 방정식을 만족하는 점들의 집합으로 정의됩니다.</p>
+    <div class="formula-container">
+      $$y^2 = x^3 + ax + b$$
+    </div>
+    <p>여기서 판별식 $\Delta = -16(4a^3 + 27b^2) \neq 0$ 이어야 곡선이 매끄럽고(non-singular), 특이점이 존재하지 않습니다. 또한 무한대점 $\mathcal{O}$를 포함합니다.</p>
+  </div>
+
+  
+
+  <h2>2. 군 구조 (Group Structure)</h2>
+  <div class="concept-card" style="border-left: 5px solid #3b82f6;">
+    <p>타원곡선 위의 두 점 $P, Q$를 더해 새로운 점 $R$을 만드는 <b>'Chord-and-Tangent'</b> 법칙을 통해 군 구조를 이룹니다.</p>
+    <ul>
+      <li><b>덧셈 법칙:</b> 두 점 $P, Q$를 잇는 직선이 곡선과 만나는 제3의 점을 구하고, 이를 $x$축에 대칭시킨 점을 $P+Q$라 정의합니다.</li>
+      <li><b>항등원:</b> 무한대점 $\mathcal{O}$가 군의 항등원 역할을 합니다.</li>
+      <li><b>결합법칙:</b> 기하학적으로 자명하지 않으나, 타원곡선 위의 점들은 덧셈에 대해 아벨 군(Abelian Group)을 형성합니다.</li>
+    </ul>
+  </div>
+
+  
+
+  <h2>3. 모델 정리 (Mordell's Theorem)</h2>
+  <div class="concept-card">
+    <p>1922년 루이스 모델은 유리수체 위에서 정의된 타원곡선의 해의 구조에 대한 기념비적인 정리를 발표했습니다.</p>
+    <div class="badge">The Theorem</div>
+    <div class="formula-container" style="background:#1e3a8a;">
+      $$E(\mathbb{Q}) \cong E(\mathbb{Q})_{\text{tors}} \times \mathbb{Z}^r$$
+    </div>
+    <p>즉, 유리수점들의 군 $E(\mathbb{Q})$는 <b>유한 생성 아벨 군</b>입니다.</p>
+    <ul>
+      <li><b>비틀림 부분군($E_{\text{tors}}$):</b> 유한한 위수를 가진 점들의 집합 (Mazur의 정리에 의해 15가지 형태만 가능).</li>
+      <li><b>랭크($r$):</b> 무한한 위수를 가진 독립적인 점들의 개수. 이 랭크를 계산하는 것이 현대 수론의 핵심 난제 중 하나입니다.</li>
+    </ul>
+  </div>
+
+  <h2>4. 수론적 응용</h2>
+  <div class="concept-card">
+    <ul>
+      <li><b>페르마의 마지막 정리:</b> 와일즈는 타원곡선과 모듈러 형식 사이의 관계(모듈러성 정리)를 이용해 이 난제를 해결했습니다.</li>
+      <li><b>타원곡선 암호(ECC):</b> 유한체 위의 타원곡선 군에서 이산 로그 문제를 푸는 것이 어렵다는 점을 이용합니다.</li>
+      <li><b>BSD 추측:</b> 타원곡선의 랭크 $r$과 L-함수의 $s=1$에서의 거동을 연결하는 밀레니엄 난제입니다.</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    타원곡선은 대수학, 기하학, 그리고 해석학이 만나는 정수론의 가장 아름다운 교차로입니다. <br>
+    © 2026 Arithmetic Geometry: Elliptic Curves & Beyond
+  </div>
+</div>
+</body>
+</html>

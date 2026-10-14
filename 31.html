@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 3.1 소수의 분포</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#1e1b4b; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #10b981; color:#064e3b;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #10b981; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#ecfdf5,#d1fae5);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #10b981;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-card {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#d1fae5; color:#047857;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>3.1 소수의 분포 (Distribution of Primes)</h1>
+  <div class="lead">
+    소수 정리(PNT)는 양의 정수 $x$ 이하에 존재하는 소수의 개수 $\pi(x)$가 $x \to \infty$일 때 어떻게 점근적으로 행동하는지를 설명하는 정수론의 이정표입니다.
+  </div>
+
+  <h2>1. 소수 계량 함수 $\pi(x)$</h2>
+  <div class="concept-card">
+    <p>$\pi(x)$는 $x$보다 작거나 같은 소수의 개수를 나타냅니다. 가우스와 르장드르는 수많은 관찰 끝에 소수의 밀도가 <b>대수함수(logarithm)</b>에 반비례한다는 가설을 세웠습니다.</p>
+    <div class="badge">Prime Number Theorem</div>
+    <div class="formula-container">
+      $$\lim_{x \to \infty} \frac{\pi(x)}{x / \ln x} = 1$$
+    </div>
+    <p>즉, 큰 $x$에 대하여 $\pi(x) \approx \frac{x}{\ln x}$입니다. 더 정밀한 근사는 다음과 같은 <b>로그 적분 함수(Logarithmic integral)</b>를 통해 얻어집니다.</p>
+    <div class="formula-container" style="background:#064e3b;">
+      $$\pi(x) \sim \text{Li}(x) = \int_2^x \frac{1}{\ln t} dt$$
+    </div>
+  </div>
+
+  
+
+  <h2>2. 체비셰프 함수 (Chebyshev Functions)</h2>
+  <p>소수 정리를 증명하기 위해 소수 자체보다 다루기 쉬운 가중치 합 함수를 도입합니다.</p>
+  <div class="concept-card" style="border-left: 5px solid #10b981;">
+    <div class="badge">제1종 체비셰프 함수 $\theta(x)$</div>
+    <p>$\theta(x) = \sum_{p \le x} \ln p$</p>
+
+    <div class="badge">제2종 체비셰프 함수 $\psi(x)$</div>
+    <p>$\psi(x) = \sum_{p^k \le x} \ln p = \sum_{n \le x} \Lambda(n)$ (여기서 $\Lambda(n)$은 폰 망골트 함수)</p>
+    
+    <p><b>핵심 성질:</b> 소수 정리는 $\psi(x) \sim x$라는 명제와 논리적으로 동치입니다.</p>
+  </div>
+
+  <h2>3. 체비셰프의 정리 (Bertrand's Postulate)</h2>
+  <div class="concept-card">
+    <p>체비셰프는 소수 정리가 완전히 증명되기 전, $\pi(x)$의 상한과 하한을 다음과 같이 결정했습니다.</p>
+    <div class="formula-container">
+      $$A \frac{x}{\ln x} < \pi(x) < B \frac{x}{\ln x}$$
+    </div>
+    <p>이 결과로부터 <b>베르트랑 공준</b>($n < p \le 2n$ 사이에 항상 소수 $p$가 존재한다)을 증명해냈습니다.</p>
+  </div>
+
+  
+
+  <h2>4. 리만 제타 함수와의 연결</h2>
+  <p>소수의 분포는 리만 제타 함수 $\zeta(s)$의 복소수 평면 위에서의 <b>영점(zeros)</b> 분포와 직결됩니다. 특히 리만 가설이 참이라면, 소수 정리의 오차항은 $O(\sqrt{x} \ln x)$ 수준으로 극도로 작아집니다.</p>
+
+  <div class="footer">
+    소수는 무질서한 수의 파편이 아니라, 로그 함수라는 부드러운 곡선 위에서 질서 정연하게 춤추고 있습니다. <br>
+    © 2026 Number Theory: Prime Distribution & Analytic Studies
+  </div>
+</div>
+</body>
+</html>

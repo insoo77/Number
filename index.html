@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정수론 강좌 인덱스</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+        }
+        body {
+            font-family: "Pretendard", "Noto Sans KR", sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .category {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .category h2 {
+            font-size: 1.25rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        .category h2::before {
+            content: "📘";
+            margin-right: 10px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        li a {
+            text-decoration: none;
+            color: #475569;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        li a:hover {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .badge-ex {
+            font-size: 0.75rem;
+            background: #dcfce7;
+            color: #15803d;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>정수론 (Number Theory)</h1>
+        <p>기초부터 현대 대수적 정수론까지의 완벽 가이드</p>
+    </header>
+
+    <div class="grid">
+        <div class="category">
+            <h2>1. 정수의 기초와 합동식</h2>
+            <ul>
+                <li><a href="11.html">11. 나눗셈과 GCD</a></li>
+                <li><a href="12.html">12. 나눗셈과 GCD <span class="badge-ex">예제 10선</span></a></li>
+                <li><a href="13.html">13. 소수와 기본정리</a></li>
+                <li><a href="14.html">14. 소수와 기본정리 <span class="badge-ex">예제 10선</span></a></li>
+                <li><a href="15.html">15. 합동식</a></li>
+                <li><a href="16.html">16. 합동식과 <span class="badge-ex">예제 10선</span></a></li>
+                <li><a href="17.html">17. 오일러 & 페르마 정리</a></li>
+                <li><a href="18.html">18. 오일러 & 페르마 정리 <span class="badge-ex">예제 10선</span></a></li>
+                <li><a href="19.html">19. 이차잉여와 상호법칙</a></li>
+                <li><a href="19a.html">19. 이차잉여와 상호법칙 증명 </a></li>
+                <li><a href="19b.html">19. 이차잉여와 상호법칙 예제<span class="badge-ex">예제 10선</span></a></li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h2>2. 산술 함수와 방정식</h2>
+            <ul>
+                <li><a href="21.html">21. 산술 함수와 디리클레 합성</a></li>
+                <li><a href="22.html">22. 산술 함수와 <span class="badge-ex">예제 10선</span></a></li>
+                <li><a href="23.html">23. 분할과 조합적 정수론</a></li>
+                <li><a href="24.html">24. 분할과 조합적 정수론 <span class="badge-ex">예제 10선</span></a></li>
+                <li><a href="25.html">25. 디오판토스 방정식</a></li>
+                <li><a href="26.html">26. 디오판토스 방정식 <span class="badge-ex">예제 10선</span></a></li>
+                <li><a href="27.html">27. 원시근과 순환군</a></li>
+                <li><a href="28.html">28. 원시근과 순환군 <span class="badge-ex">예제 10선</span></a></li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h2>3. 해석적 정수론</h2>
+            <ul>
+                <li><a href="31.html">31. 소수의 분포</a></li>
+                <li><a href="32.html">32. 소수의 분포와 체비셰프 함수 <span class="badge-ex">예제 10선</span></a></li>
+                <li><a href="33.html">33. 리만 제타 함수와 오일러 곱</a></li>
+                <li><a href="34.html">34. 리만 제타 함수와 오일러 곱 <span class="badge-ex">예제 10선</span></a></li>
+                <li><a href="35.html">35. 디리클레 정리와 L-함수</a></li>
+                <li><a href="36.html">36. 디리클레 정리와 L-함수 <span class="badge-ex">예제 10선</span></a></li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h2>4. 대수적 정수론</h2>
+            <ul>
+                <li><a href="41.html">41. 수체와 대수적 정수</a></li>
+                <li><a href="42.html">42. 수체와 대수적 정수 <span class="badge-ex">예제 10선</span></a></li>
+                <li><a href="43.html">43. 아이디얼 이론과 유일분해</a></li>
+                <li><a href="44.html">44. 아이디얼 이론과 <span class="badge-ex">예제 10선</span></a></li>
+                <li><a href="45.html">45. 클래스 군과 단위군</a></li>
+                <li><a href="46.html">46. 클래스 군과 단위군 <span class="badge-ex">예제 10선</span></a></li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h2>5. 산술 기하와 현대 정리</h2>
+            <ul>
+                <li><a href="51.html">51. 타원곡선과 모델 정리</a></li>
+                <li><a href="52.html">52. 타원곡선과 모델 정리 <span class="badge-ex">예제</span></a></li>
+                <li><a href="53.html">53. 모듈러 형식과 헤케 연산자</a></li>
+                <li><a href="54.html">54. 모듈러 형식과 헤케 연산자 <span class="badge-ex">예제</span></a></li>
+                <li><a href="55.html">55. 갈루아 표현</a></li>
+                <li><a href="56.html">56. 갈루아 표현 <span class="badge-ex">예제</span></a></li>
+                <li><a href="57.html">57. 현대 주요 정리</a></li>
+                <li><a href="58.html">58. 현대 주요 정리 <span class="badge-ex">예제</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Number Theory Education Series. All rights reserved.</p>
+    </footer>
+</div>
+
+</body>
+</html>

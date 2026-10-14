@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 4.1 수체와 대수적 정수</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#4c1d95; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #8b5cf6; color:#2e1065;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #8b5cf6; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#f5f3ff,#ede9fe);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #8b5cf6;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-card {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#ede9fe; color:#4c1d95;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>4.1 수체(Number Fields) & 대수적 정수</h1>
+  <div class="lead">
+    대수적 정수론은 유리수 $\mathbb{Q}$의 확장을 통해 정수의 개념을 넓히고, 그 안에서 소인수분해의 유일성 등 산술적 성질을 탐구하는 분야입니다.
+  </div>
+
+  <h2>1. 대수적 수 (Algebraic Number)</h2>
+  <div class="concept-card">
+    <p>복소수 $\alpha$가 유리수 계수 다항식 $f(x) \in \mathbb{Q}[x]$의 근일 때, $\alpha$를 <b>대수적 수</b>라고 합니다.</p>
+    <div class="badge">Definition</div>
+    <p>유리수체 $\mathbb{Q}$에 대수적 수 $\alpha$를 첨가하여 만든 체 $K = \mathbb{Q}(\alpha)$를 <b>수체(Number Field)</b>라 하며, 이는 $\mathbb{Q}$ 위에서 유한 차원의 벡터 공간 구조를 가집니다.</p>
+    <ul>
+      <li>예: $\sqrt{2}, i, \sqrt[3]{5}$ 등은 모두 대수적 수입니다.</li>
+      <li>$\pi, e$와 같은 수는 대수적 수가 아닌 <b>초월수(Transcendental number)</b>입니다.</li>
+    </ul>
+  </div>
+
+  
+
+  <h2>2. 대수적 정수 (Algebraic Integer)</h2>
+  <div class="concept-card" style="border-left: 5px solid #8b5cf6;">
+    <p>단순한 대수적 수를 넘어, <b>정수 계수</b>이면서 <b>최고차항의 계수가 1인(monic)</b> 다항식의 근이 되는 수를 특별히 대수적 정수라고 부릅니다.</p>
+    <div class="formula-container">
+      $x^n + a_{n-1}x^{n-1} + \dots + a_1x + a_0 = 0 \quad (a_i \in \mathbb{Z})$
+    </div>
+    <p>모든 유리수 $\mathbb{Q}$ 중에서 대수적 정수인 것은 오직 우리가 아는 정수 $\mathbb{Z}$뿐입니다.</p>
+  </div>
+
+  <h2>3. 정수환 (Ring of Integers)의 정의</h2>
+  <div class="concept-card">
+    <p>수체 $K$ 내부에 포함된 모든 대수적 정수들의 집합을 <b>정수환</b>이라 하며, $\mathcal{O}_K$로 표기합니다.</p>
+    <div class="badge">Notation: $\mathcal{O}_K$</div>
+    <p>$\mathcal{O}_K$는 덧셈과 곱셈에 대해 닫혀 있어 환(Ring)의 구조를 이루며, 일반적인 산술의 법칙이 적용되는 무대입니다.</p>
+    <div class="formula-container" style="background:#2e1065;">
+      $\mathcal{O}_K = \{ \alpha \in K \mid \alpha \text{ is an algebraic integer} \}$
+    </div>
+    <h3>주요 예시</h3>
+    <ul>
+      <li>$K = \mathbb{Q}(i)$ 인 경우: $\mathcal{O}_K = \mathbb{Z}[i]$ (가우스 정수)</li>
+      <li>$K = \mathbb{Q}(\sqrt{5})$ 인 경우: $\mathcal{O}_K = \mathbb{Z}[\frac{1+\sqrt{5}}{2}]$ (황금비 포함)</li>
+    </ul>
+  </div>
+
+  
+
+  <div class="footer">
+    수체와 정수환은 현대 정수론의 가장 기초적이면서도 강력한 대수적 도구입니다. <br>
+    © 2026 Algebraic Number Theory: Fields & Rings
+  </div>
+</div>
+</body>
+</html>

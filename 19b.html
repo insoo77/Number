@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 1.5 이차잉여 실전 예제</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f1f5f9; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#064e3b; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #10b981; color:#065f46;}
+  .lead{
+    font-size:1.1rem; background:#f0fdf4; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #10b981;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .status-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#dcfce7; color:#15803d;
+  }
+  .problem { font-weight: 700; color: #1e293b; font-size: 1.1rem; margin-bottom: 12px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .step-title { font-weight: 700; color: #059669; margin-top: 10px; display: block; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>1.5 이차잉여와 상호 법칙 실전 예제 10선</h1>
+  <div class="lead">
+    방정식 $x^2 \equiv a \pmod p$의 해의 존재성을 판별하는 르장드르 기호($\frac{a}{p}$)와 가우스의 이차 상호 법칙을 완벽히 마스터해 봅니다.
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 1. 오일러 판정법 (Euler's Criterion)</div>
+    <div class="problem">문제: 오일러 판정법을 사용하여 $\left( \frac{3}{7} \right)$의 값을 구하시오.</div>
+    <div class="solution">
+      $\left( \frac{a}{p} \right) \equiv a^{(p-1)/2} \pmod p$ 이므로, $p=7, a=3$을 대입한다. <br>
+      $3^{(7-1)/2} = 3^3 = 27$ <br>
+      $27 \equiv -1 \pmod 7$ <br>
+      $\therefore \left( \frac{3}{7} \right) = -1$ (3은 법 7에 대해 이차비잉여이다.)
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 2. -1의 이차잉여 판별</div>
+    <div class="problem">문제: $x^2 \equiv -1 \pmod{13}$ 은 해를 갖는가?</div>
+    <div class="solution">
+      제1 보충 법칙: $\left( \frac{-1}{p} \right) = 1 \iff p \equiv 1 \pmod 4$ <br>
+      $13 = 4 \times 3 + 1 \equiv 1 \pmod 4$ 이다. <br>
+      $\therefore \left( \frac{-1}{13} \right) = 1$. 즉, 방정식은 해를 갖는다. (실제 해는 $x \equiv 5, 8 \pmod{13}$)
+    </div>
+  </div>
+
+  
+
+  <div class="example-box">
+    <div class="status-badge">Ex 3. 2의 이차잉여 판별</div>
+    <div class="problem">문제: $\left( \frac{2}{17} \right)$의 값을 구하시오.</div>
+    <div class="solution">
+      제2 보충 법칙: $\left( \frac{2}{p} \right) = 1 \iff p \equiv 1, 7 \pmod 8$ <br>
+      $17 = 8 \times 2 + 1 \equiv 1 \pmod 8$ 이다. <br>
+      $\therefore \left( \frac{2}{17} \right) = 1$.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 4. 이차 상호 법칙 (QR Law)</div>
+    <div class="problem">문제: $\left( \frac{3}{11} \right)$의 값을 구하시오.</div>
+    <div class="solution">
+      3과 11은 모두 $4n+3$ 꼴 소수이다. <br>
+      QR Law: $\left( \frac{3}{11} \right) = -\left( \frac{11}{3} \right)$ <br>
+      $11 \equiv 2 \pmod 3$ 이므로, $\left( \frac{11}{3} \right) = \left( \frac{2}{3} \right)$ <br>
+      $3 \equiv 3 \pmod 8$ 이므로 $\left( \frac{2}{3} \right) = -1$ <br>
+      $\therefore \left( \frac{3}{11} \right) = -(-1) = 1$.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 5. 합성수에 대한 기호 분해</div>
+    <div class="problem">문제: $\left( \frac{14}{31} \right)$의 값을 구하시오.</div>
+    <div class="solution">
+      르장드르 기호의 곱셈적 성질 활용: $\left( \frac{14}{31} \right) = \left( \frac{2}{31} \right) \left( \frac{7}{31} \right)$ <br>
+      1) $\left( \frac{2}{31} \right)$: $31 \equiv 7 \pmod 8 \implies 1$ <br>
+      2) $\left( \frac{7}{31} \right)$: 둘 다 $4n+3$ 꼴이므로 $-\left( \frac{31}{7} \right) = -\left( \frac{3}{7} \right)$ <br>
+      3) $\left( \frac{3}{7} \right) = -\left( \frac{7}{3} \right) = -\left( \frac{1}{3} \right) = -1$ <br>
+      $\therefore \left( \frac{14}{31} \right) = 1 \times (-(-1)) = 1$.
+    </div>
+  </div>
+
+  
+
+  <div class="example-box">
+    <div class="status-badge">Ex 6. 실전 QR 계산</div>
+    <div class="problem">문제: $\left( \frac{71}{73} \right)$의 값을 구하시오.</div>
+    <div class="solution">
+      $73 \equiv 1 \pmod 4$ 이므로 $\left( \frac{71}{73} \right) = \left( \frac{73}{71} \right)$ <br>
+      $\left( \frac{73}{71} \right) = \left( \frac{2}{71} \right)$ <br>
+      $71 \equiv 7 \pmod 8$ 이므로 제2 보충 법칙에 의해 $1$ <br>
+      $\therefore \left( \frac{71}{73} \right) = 1$.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 7. 조건부 존재성</div>
+    <div class="problem">문제: $x^2 \equiv 3 \pmod p$ 가 해를 갖기 위한 홀수 소수 $p$의 조건을 구하시오.</div>
+    <div class="solution">
+      $\left( \frac{3}{p} \right) = 1$ 이어야 한다. <br>
+      $\left( \frac{3}{p} \right) = \left( \frac{p}{3} \right) (-1)^{\frac{p-1}{2} \frac{3-1}{2}} = \left( \frac{p}{3} \right) (-1)^{\frac{p-1}{2}}$ <br>
+      1) $p \equiv 1 \pmod 4 \implies \left( \frac{p}{3} \right) = 1 \implies p \equiv 1 \pmod 3$ <br>
+      조합하면 $p \equiv 1, 13, \dots \equiv 1 \pmod{12}$ <br>
+      2) $p \equiv 3 \pmod 4 \implies -\left( \frac{p}{3} \right) = 1 \implies p \equiv 2 \pmod 3$ <br>
+      조합하면 $p \equiv 11, 23, \dots \equiv 11 \pmod{12}$ <br>
+      $\therefore p \equiv 1, 11 \pmod{12}$ 일 때 해를 갖는다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 8. 증명 - 가우스 보조정리 맛보기</div>
+    <div class="problem">문제: 가우스 보조정리를 사용하여 $\left( \frac{3}{13} \right)$을 판별하시오.</div>
+    <div class="solution">
+      $S = \{3 \cdot 1, 3 \cdot 2, \dots, 3 \cdot \frac{13-1}{2}\} = \{3, 6, 9, 12, 15, 18\}$ <br>
+      법 13에 대한 최소 양의 잉여: $\{3, 6, 9, 12, 2, 5\}$ <br>
+      $p/2 = 6.5$ 보다 큰 원소는 $\{9, 12\}$ 총 2개($n=2$)이다. <br>
+      $\left( \frac{3}{13} \right) = (-1)^2 = 1$.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 9. QR과 QNR의 분포</div>
+    <div class="problem">문제: 홀수 소수 $p$에 대하여 법 $p$의 이차잉여와 이차비잉여의 개수가 같음을 보이시오.</div>
+    <div class="solution">
+      집합 $\{1, 2, \dots, p-1\}$의 원소 $x$를 제곱하면 $x^2 \equiv (p-x)^2 \pmod p$이다. <br>
+      즉, 모든 제곱수는 두 번씩 나타난다. <br>
+      서로 다른 제곱수의 개수는 $(p-1)/2$개이며, 이것이 이차잉여의 개수이다. <br>
+      나머지 $(p-1) - (p-1)/2 = (p-1)/2$개가 이차비잉여이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 10. 복잡한 기호의 계산</div>
+    <div class="problem">문제: $\left( \frac{123}{1009} \right)$의 값을 구하시오. (1009는 소수)</div>
+    <div class="solution">
+      $\left( \frac{123}{1009} \right) = \left( \frac{3}{1009} \right) \left( \frac{41}{1009} \right)$ <br>
+      1) $\left( \frac{3}{1009} \right)$: $1009 \equiv 1 \pmod 4 \implies \left( \frac{1009}{3} \right) = \left( \frac{1}{3} \right) = 1$ <br>
+      2) $\left( \frac{41}{1009} \right)$: 둘 다 $1 \pmod 4 \implies \left( \frac{1009}{41} \right) = \left( \frac{25}{41} \right)$ <br>
+      25는 완전제곱수이므로 $\left( \frac{25}{41} \right) = 1$ <br>
+      $\therefore \left( \frac{123}{1009} \right) = 1 \times 1 = 1$.
+    </div>
+  </div>
+
+  <div class="footer">
+    이차 상호 법칙은 소수들 사이의 "거울을 보는 듯한" 신비로운 대칭성을 완성합니다. <br>
+    © 2026 Number Theory: Quadratic Residue Studies
+  </div>
+</div>
+</body>
+</html>

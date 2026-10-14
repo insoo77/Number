@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 5.4 현대 주요 정리</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f0f4f8; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#1e3a8a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #3b82f6; color:#1e40af;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #3b82f6; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#ebf8ff,#bee3f8);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #3182ce;
+  }
+  .formula-container{
+    background:#1a202c; color:#edf2f7; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-card {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#ebf8ff; color:#2c5282;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#a0aec0; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>5.4 현대 정수론의 금자탑</h1>
+  <div class="lead">
+    350년의 난제 <b>페르마의 마지막 정리</b>의 해결과 수학의 모든 분야를 통합하려는 원대한 계획인 <b>랭글랜즈 프로그램</b>을 조명합니다.
+  </div>
+
+  <h2>1. 페르마의 마지막 정리 (Fermat's Last Theorem)</h2>
+  <div class="concept-card">
+    <p>1637년 피에르 드 페르마가 남긴 이 정리는 1994년 앤드루 와일즈(Andrew Wiles)에 의해 마침내 정복되었습니다.</p>
+    <div class="formula-container">
+      $$x^n + y^n = z^n \quad (n > 2)$$
+    </div>
+    <p>위 방정식을 만족하는 0이 아닌 정수해 $(x, y, z)$는 존재하지 않습니다.</p>
+    <div class="badge">Proof Strategy: The Bridge</div>
+    <p>와일즈는 직접적인 정수론적 접근 대신, <b>타원곡선</b>과 <b>모듈러 형식</b> 사이의 관계를 증명하는 우회로를 선택했습니다.</p>
+    <ul>
+      <li><b>프라이(Frey) 곡선:</b> 만약 페르마 해가 있다면 특이한 타원곡선을 만들 수 있다.</li>
+      <li><b>리베(Ribet) 정리:</b> 그 타원곡선은 모듈러 형식이 될 수 없다.</li>
+      <li><b>와일즈의 증명:</b> 모든 타원곡선은 모듈러 형식이다(모듈러성 정리). 따라서 페르마 해는 존재할 수 없다.</li>
+    </ul>
+  </div>
+
+  
+
+  <h2>2. 랭글랜즈 프로그램 (Langlands Program)</h2>
+  <div class="concept-card" style="border-left: 5px solid #3182ce;">
+    <p>1967년 로버트 랭글랜즈가 제안한 이 프로그램은 "수학의 모든 분야는 하나의 거대한 질서 속에 연결되어 있다"는 가설입니다.</p>
+    <div class="badge">The Grand Unified Theory of Mathematics</div>
+    <p>주요 연결 고리는 다음과 같습니다.</p>
+    <ul>
+      <li><b>대수적 측면:</b> 수체의 갈루아 표현 (Galois Representations)</li>
+      <li><b>해석적 측면:</b> 오토모픽 형식 (Automorphic Forms / Modular Forms)</li>
+    </ul>
+    <p>이 둘 사이의 <b>대응 관계</b>가 존재한다는 것이 핵심이며, 이는 제타 함수와 L-함수의 성질을 통해 구체화됩니다. 페르마의 마지막 정리 증명은 이 거대한 프로그램 중 아주 일부분(GL₂에 대한 사례)을 해결한 것에 불과합니다.</p>
+  </div>
+
+  
+
+  <h2>3. 현대 정수론의 의의</h2>
+  <div class="concept-card">
+    <h3>수학적 통합</h3>
+    <p>현대 정수론은 더 이상 숫자만을 연구하지 않습니다. 곡선의 기하학, 복소평면의 함수, 행렬의 선형대수학이 어우러져 하나의 진리를 향해 나아갑니다.</p>
+    <h3>실용적 가치</h3>
+    <p>이러한 고등 수학의 성과들은 오늘날 우리가 사용하는 <b>타원곡선 암호(ECC)</b>, <b>양자 내성 암호</b> 등의 이론적 토대가 되어 현대 사회의 보안을 지탱하고 있습니다.</p>
+  </div>
+
+  <div class="footer">
+    "수학은 논리적 일관성을 넘어, 우주가 숨겨놓은 아름다운 대칭을 찾는 여정입니다." <br>
+    © 2026 Modern Number Theory: From Fermat to Langlands
+  </div>
+</div>
+</body>
+</html>

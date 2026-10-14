@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 4.3 클래스 군과 단위군 실전 예제</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f1f5f9; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#15803d; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #4ade80; color:#14532d;}
+  .lead{
+    font-size:1.1rem; background:#f0fdf4; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #16a34a;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .status-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#dcfce7; color:#15803d;
+  }
+  .problem { font-weight: 700; color: #1e293b; font-size: 1.1rem; margin-bottom: 12px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>4.3 클래스 군 & 단위군 실전 예제 10선</h1>
+  <div class="lead">
+    아이디얼 클래스 군(Ideal Class Group)의 유한성과 디리클레 단위 정리(Dirichlet Unit Theorem)의 구조적 성질을 구체적인 예제를 통해 증명하고 이해합니다.
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 1. 유수 1의 의미</div>
+    <div class="problem">문제: 수체 $K$의 유수 $h_K = 1$일 필요충분조건은 $\mathcal{O}_K$가 주아이디얼 정역(PID)임을 보이시오.</div>
+    <div class="solution">
+      아이디얼 클래스 군 $Cl_K = I_K / P_K$의 크기가 1이라는 것은 모든 분수 아이디얼 $I \in I_K$가 주분수 아이디얼 $P \in P_K$와 같음을 의미한다. <br>
+      따라서 $\mathcal{O}_K$의 모든 아이디얼은 하나의 원소로 생성되는 주아이디얼이 된다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 2. 민코프스키 경계 계산</div>
+    <div class="problem">문제: $K = \mathbb{Q}(\sqrt{-5})$일 때, 모든 아이디얼 클래스가 포함해야 하는 아이디얼의 노름 상한을 구하시오.</div>
+    <div class="solution">
+      민코프스키 상수는 $M_K = \frac{n!}{n^n} (\frac{4}{\pi})^{r_2} \sqrt{|\Delta_K|}$ 이다. <br>
+      $n=2, r_1=0, r_2=1, \Delta_K = -20$ 이므로, $M_K = \frac{2}{4} \cdot \frac{4}{\pi} \sqrt{20} = \frac{2\sqrt{20}}{\pi} \approx 2.84$. <br>
+      따라서 노름이 2 이하인 소아이디얼들만 조사하면 클래스 군을 결정할 수 있다.
+    </div>
+  </div>
+
+  
+
+  <div class="example-box">
+    <div class="status-badge">Ex 3. 허 이차체의 가역원</div>
+    <div class="problem">문제: $d < -3$ 인 허 이차체 $K = \mathbb{Q}(\sqrt{d})$의 단위군은 항상 $\{\pm 1\}$ 임을 보이시오.</div>
+    <div class="solution">
+      단위 $\alpha = a+b\sqrt{d}$의 노름은 $N(\alpha) = a^2 + |d|b^2 = 1$ 이어야 한다 ($a, b \in \mathbb{Z}$ 또는 $\mathbb{Z}+1/2$). <br>
+      $|d| > 3$ 이면 $b \neq 0$ 일 때 $a^2 + |d|b^2 > 1$ 이 되어 모순이다. <br>
+      따라서 $b=0, a^2=1$ 이 되어 $\alpha = \pm 1$ 뿐이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 4. 실 이차체의 단위군</div>
+    <div class="problem">문제: $K = \mathbb{Q}(\sqrt{2})$의 단위군 $U_K$의 구조를 기술하시오.</div>
+    <div class="solution">
+      $r_1=2, r_2=0$ 이므로 $r = 2+0-1 = 1$ 이다. <br>
+      따라서 $U_K \cong \{\pm 1\} \times \mathbb{Z}$ 이다. <br>
+      노름 $a^2 - 2b^2 = \pm 1$ 의 최소해는 $1+\sqrt{2}$ 이므로, 모든 단위는 $\pm(1+\sqrt{2})^n$ 꼴이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 5. 아이디얼 클래스의 곱</div>
+    <div class="problem">문제: $\mathbb{Z}[\sqrt{-5}]$에서 $\mathfrak{p} = (2, 1+\sqrt{-5})$ 클래스의 위수(order)가 2임을 보이시오.</div>
+    <div class="solution">
+      앞서 $\mathfrak{p}^2 = (2)$ 임을 보았다. $(2)$는 주아이디얼이므로 클래스 군 내에서 항등원이다. <br>
+      $\mathfrak{p}$ 자체는 주아이디얼이 아니므로, $\mathfrak{p}$ 클래스의 위수는 정확히 2이다.
+    </div>
+  </div>
+
+  
+
+  <div class="example-box">
+    <div class="status-badge">Ex 6. 3차체의 단위군 랭크</div>
+    <div class="problem">문제: $f(x) = x^3 - 2$ 의 근으로 생성된 수체 $K = \mathbb{Q}(\sqrt[3]{2})$의 단위군 랭크 $r$을 구하시오.</div>
+    <div class="solution">
+      근은 $\sqrt[3]{2}$ (실근 1개)와 $\sqrt[3]{2}\omega, \sqrt[3]{2}\omega^2$ (복소근 2개)이다. <br>
+      $r_1 = 1, r_2 = 1$ 이므로, $r = 1 + 1 - 1 = 1$ 이다. <br>
+      이 체의 단위군은 실 이차체와 유사한 구조를 가진다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 7. μ(K)의 결정</div>
+    <div class="problem">문제: $K = \mathbb{Q}(i)$에서 $\mu(K)$를 구하시오.</div>
+    <div class="solution">
+      $K$에 포함된 1의 거듭제곱근은 $x^n - 1 = 0$의 해여야 한다. <br>
+      $i$ 자체가 $x^4 - 1 = 0$의 근이므로 $\{1, i, -1, -i\}$가 포함된다. <br>
+      이체는 차수가 2이므로 더 이상의 거듭제곱근을 포함할 수 없다. $\therefore \mu(K) \cong \mathbb{Z}/4\mathbb{Z}$.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 8. 단위와 펠 방정식</div>
+    <div class="problem">문제: $x^2 - dy^2 = 1$의 정수해가 실 이차체 $K=\mathbb{Q}(\sqrt{d})$의 단위와 어떤 관계가 있는지 서술하시오.</div>
+    <div class="solution">
+      $x+y\sqrt{d}$는 노름이 1인 $\mathcal{O}_K$의 단위이다. <br>
+      펠 방정식의 모든 해를 구하는 것은 단위군의 기본 단위를 찾는 것과 동일한 문제이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 9. y^2 + 5 = x^3 의 해</div>
+    <div class="problem">문제: $\mathbb{Z}[\sqrt{-5}]$의 유수가 2라는 사실이 위 방정식의 정수해 존재성에 주는 영향을 서술하시오.</div>
+    <div class="solution">
+      인수분해 $(y+\sqrt{-5})(y-\sqrt{-5}) = x^3$을 할 때, 만약 유수가 1(PID)이었다면 각 인수가 세제곱수가 되어야 한다. <br>
+      하지만 유수가 2이므로 아이디얼 수준의 분석이 필요하며, 이는 정수해의 성질을 제한하는 강력한 도구가 된다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 10. 단위군의 기하학적 부피</div>
+    <div class="problem">문제: 로그 매장(Logarithmic embedding)에서 단위들이 이루는 격자의 부피인 '레귤레이터'의 개념을 설명하시오.</div>
+    <div class="solution">
+      단위군을 유클리드 공간으로 보내면 랭크 $r$인 격자가 된다. <br>
+      이 격자의 기본 영역의 부피가 레귤레이터 $R_K$이며, 이는 유수 공식에서 수체의 복잡성을 나타내는 중요한 상수가 된다.
+    </div>
+  </div>
+
+  
+
+  <div class="footer">
+    클래스 군은 수체의 산술적 결함을, 단위군은 수체의 무한한 대칭성을 상징합니다. <br>
+    © 2026 Algebraic Number Theory: Classes & Units
+  </div>
+</div>
+</body>
+</html>

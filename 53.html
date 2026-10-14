@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 5.2 모듈러 형식과 헤케 연산자</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#c026d3; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #e879f9; color:#701a75;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #e879f9; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#fdf4ff,#fae8ff);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #d946ef;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-card {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#fae8ff; color:#c026d3;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>5.2 모듈러 형식(Modular Forms) & 헤케 연산자</h1>
+  <div class="lead">
+    모듈러 형식은 복소해석학적 대칭성을 정수론의 소수 구조와 연결하는 가교 역할을 하며, 페르마의 마지막 정리 증명의 핵심 열쇠가 되었습니다.
+  </div>
+
+  <h2>1. 모듈러 형식의 정의</h2>
+  <div class="concept-card">
+    <p>상반평면 $\mathbb{H} = \{ z \in \mathbb{C} \mid \text{Im}(z) > 0 \}$ 위에서 정의된 홀로모픽 함수 $f(z)$가 무한대에서 정칙적이며, 다음 <b>모듈러 변환</b>을 만족할 때 가중치(weight) $k$인 모듈러 형식이라 합니다.</p>
+    <div class="formula-container">
+      $$f\left( \frac{az+b}{cz+d} \right) = (cz+d)^k f(z) \quad \forall \begin{pmatrix} a & b \\ c & d \end{pmatrix} \in SL_2(\mathbb{Z})$$
+    </div>
+    <p>이 함수는 주기성($f(z+1)=f(z)$)을 가지므로 다음과 같은 <b>푸리에 전개(q-expansion)</b>가 가능합니다.</p>
+    <div class="formula-container" style="background:#4a044e;">
+      $$f(z) = \sum_{n=0}^{\infty} a_n q^n, \quad q = e^{2\pi i z}$$
+    </div>
+  </div>
+
+  
+
+  <h2>2. 헤케 연산자 (Hecke Operators)</h2>
+  <div class="concept-card" style="border-left: 5px solid #d946ef;">
+    <p>헤케 연산자 $T_n$은 모듈러 형식들의 공간 위에서 작용하는 선형 연산자로, 모듈러 형식의 계수들 사이의 산술적 관계를 규명합니다.</p>
+    <div class="badge">Arithmetic Property</div>
+    <p>가중치 $k$인 모듈러 형식에 대한 $T_p$ ($p$는 소수)의 작용은 다음과 같습니다.</p>
+    <div class="formula-container">
+      $$(T_p f)(z) = \sum_{n=0}^{\infty} (a_{pn} + p^{k-1} a_{n/p}) q^n$$
+    </div>
+    <p>이 연산자들의 고유 함수(Eigenform)인 경우, 그 푸리에 계수 $a_n$은 <b>곱셈적 성질</b>($a_{mn} = a_m a_n$)을 가지게 되어 정수론적으로 매우 중요한 의미를 갖습니다.</p>
+  </div>
+
+  <h2>3. 모듈러성과 소수</h2>
+  <div class="concept-card">
+    <h3>아이젠슈타인 급수와 델타 함수</h3>
+    <ul>
+      <li><b>Eisenstein Series ($E_k$):</b> 가장 기본적인 모듈러 형식으로, 계수가 약수 함수($\sigma_{k-1}(n)$)와 연결됩니다.</li>
+      <li><b>Discriminant Function ($\Delta$):</b> 가중치 12인 커스프 형식(Cusp form)으로, 라마누잔의 타우 함수($\tau(n)$)를 계수로 가집니다.</li>
+    </ul>
+    <div class="badge">Ramanujan's Conjecture</div>
+    <p>헤케 연산자의 이론은 $|\tau(p)| \leq 2p^{11/2}$와 같은 깊은 소수 관련 추측을 해결하는 토대가 되었습니다.</p>
+  </div>
+
+  
+
+  <h2>4. 타원곡선과의 연결 (Modularity Theorem)</h2>
+  <div class="concept-card">
+    <p><b>모듈러성 정리:</b> 모든 유리수체 위의 타원곡선은 특정한 모듈러 형식으로부터 온다.</p>
+    <p>이 정리는 타원곡선의 점의 개수를 세는 수열($a_p$)이 어떤 모듈러 형식의 푸리에 계수와 일치함을 의미하며, 이를 통해 페르마의 마지막 정리가 최종적으로 증명되었습니다.</p>
+  </div>
+
+  <div class="footer">
+    모듈러 형식은 무한한 대칭성 속에 소수의 비밀을 품고 있는 정수론의 보석입니다. <br>
+    © 2026 Automorphic Forms: Modular Symmetry Studies
+  </div>
+</div>
+</body>
+</html>

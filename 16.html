@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 1.3 합동식과 선형 방정식</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f1f5f9; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#92400e; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #f59e0b; color:#78350f;}
+  .lead{
+    font-size:1.1rem; background:#fffbeb; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #f59e0b;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .status-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#fef3c7; color:#92400e;
+  }
+  .problem { font-weight: 700; color: #1e293b; font-size: 1.1rem; margin-bottom: 12px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .step-title { font-weight: 700; color: #b45309; margin-top: 10px; display: block; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>1.3 합동식(Congruence) 실전 예제 10선</h1>
+  <div class="lead">
+    합동식의 대수적 성질과 선형 합동방정식 $ax \equiv b \pmod m$의 해법을 다루는 10가지 예제입니다. <b>잉여역수(Modular Inverse)</b>의 개념을 익히는 데 집중해 보세요.
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 1. 합동과 거듭제곱</div>
+    <div class="problem">문제: $a \equiv b \pmod m$ 이면 모든 양의 정수 $k$에 대해 $a^k \equiv b^k \pmod m$ 임을 증명하시오.</div>
+    <div class="solution">
+      $a \equiv b \pmod m$ 은 $m \mid (a-b)$ 임을 의미한다. <br>
+      인수분해 공식에 의해 $a^k - b^k = (a-b)(a^{k-1} + a^{k-2}b + \dots + b^{k-1})$ 이다. <br>
+      $(a-b)$가 $m$의 배수이므로, $(a^k - b^k)$ 역시 $m$의 배수가 된다. <br>
+      따라서 $a^k \equiv b^k \pmod m$ 이 성립한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 2. 나머지 계산의 묘미</div>
+    <div class="problem">문제: $41^{65}$ 를 7로 나눈 나머지를 구하시오.</div>
+    <div class="solution">
+      $41 = 7 \times 5 + 6 \equiv 6 \equiv -1 \pmod 7$ 이다. <br>
+      따라서 $41^{65} \equiv (-1)^{65} \pmod 7$ 이 성립한다. <br>
+      $(-1)^{65} = -1 \equiv 6 \pmod 7$ <br>
+      $\therefore$ 나머지는 6이다.
+    </div>
+  </div>
+
+  
+
+  <div class="example-box">
+    <div class="status-badge">Ex 3. 해의 존재 여부 판별</div>
+    <div class="problem">문제: $21x \equiv 14 \pmod{35}$ 의 해의 개수를 구하시오.</div>
+    <div class="solution">
+      $a=21, b=14, m=35$ 일 때, $d = \gcd(21, 35) = 7$ 이다. <br>
+      $d=7$ 이 $b=14$ 를 나누는지 확인한다: $7 \mid 14$ (참) <br>
+      따라서 이 방정식은 법 35에 대하여 <b>7개</b>의 서로 다른 해를 갖는다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 4. 방정식의 일반해 구하기</div>
+    <div class="problem">문제: $3x \equiv 5 \pmod 7$ 의 해를 구하시오.</div>
+    <div class="solution">
+      법 7은 소수이므로 3의 잉여역수가 존재한다. <br>
+      $3 \times 1 \equiv 3$, $3 \times 2 \equiv 6$, $3 \times 3 \equiv 9 \equiv 2$, $3 \times 4 \equiv 12 \equiv 5 \pmod 7$ <br>
+      따라서 $x \equiv 4 \pmod 7$ 이 해가 된다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 5. 큰 법에서의 역원</div>
+    <div class="problem">문제: $13x \equiv 1 \pmod{60}$ 을 만족하는 $x$를 구하시오.</div>
+    <div class="solution">
+      $\gcd(13, 60)=1$ 이므로 확장 유클리드 알고리즘을 사용한다. <br>
+      $60 = 4 \times 13 + 8$ <br>
+      $13 = 1 \times 8 + 5$ <br>
+      $8 = 1 \times 5 + 3$ <br>
+      $5 = 1 \times 3 + 2$ <br>
+      $3 = 1 \times 2 + 1$ <br>
+      역추적하면 $1 = 23 \times 13 - 5 \times 60$ 을 얻는다. <br>
+      $\therefore x \equiv 23 \pmod{60}$
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 6. 9의 배수 판정법</div>
+    <div class="problem">문제: 어떤 정수의 각 자릿수의 합이 9의 배수이면 그 수도 9의 배수임을 증명하시오.</div>
+    <div class="solution">
+      정수 $n = a_k 10^k + \dots + a_1 10 + a_0$ 라 하자. <br>
+      $10 \equiv 1 \pmod 9$ 이므로 $10^i \equiv 1^i \equiv 1 \pmod 9$ 이다. <br>
+      $n \equiv a_k(1) + \dots + a_1(1) + a_0 \pmod 9$ <br>
+      즉, $n \equiv \sum a_i \pmod 9$ 이므로 자릿수의 합과 원래 수는 9로 나눈 나머지가 같다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 7. 약분 규칙 (Cancellation)</div>
+    <div class="problem">문제: $10x \equiv 20 \pmod{15}$ 를 풀 때 주의할 점을 서술하시오.</div>
+    <div class="solution">
+      양변을 10으로 단순히 나누어 $x \equiv 2 \pmod{15}$ 라고 하면 틀린다. <br>
+      $\gcd(10, 15) = 5$ 이므로 법도 $15/5 = 3$ 으로 바뀌어야 한다. <br>
+      $10x \equiv 20 \pmod{15} \implies 2x \equiv 4 \pmod 3 \implies x \equiv 2 \pmod 3$ <br>
+      법 15에서의 해는 $x \equiv 2, 5, 8, 11, 14 \pmod{15}$ 총 5개이다.
+    </div>
+  </div>
+
+  
+
+  <div class="example-box">
+    <div class="status-badge">Ex 8. 제곱수의 나머지</div>
+    <div class="problem">문제: 어떤 정수의 제곱을 4로 나누면 나머지는 0 또는 1뿐임을 보이시오.</div>
+    <div class="solution">
+      $n \equiv 0 \pmod 2 \implies n^2 \equiv 0 \pmod 4$ <br>
+      $n \equiv 1 \pmod 2 \implies n^2 = (2k+1)^2 = 4k^2+4k+1 \equiv 1 \pmod 4$ <br>
+      따라서 $n^2 \equiv 0, 1 \pmod 4$ 이며 나머지가 2, 3인 제곱수는 존재하지 않는다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 9. 날짜와 합동식</div>
+    <div class="problem">문제: 오늘이 월요일이라면 $10^{10}$ 일 후는 무슨 요일인가?</div>
+    <div class="solution">
+      요일은 법 7의 시스템이다. (월=1, 화=2, ..., 일=0) <br>
+      $10 \equiv 3 \pmod 7$ <br>
+      $10^2 \equiv 9 \equiv 2$, $10^3 \equiv 6 \equiv -1 \pmod 7$ <br>
+      $10^{10} = (10^3)^3 \times 10 \equiv (-1)^3 \times 3 = -3 \equiv 4 \pmod 7$ <br>
+      월요일(1)로부터 4일 후는 금요일(5)이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 10. 부정방정식의 변환</div>
+    <div class="problem">문제: $7x + 11y = 1$ 의 정수해를 합동식을 이용해 구하시오.</div>
+    <div class="solution">
+      법 7에 대해 방정식을 쓰면: $11y \equiv 1 \pmod 7$ <br>
+      $4y \equiv 1 \pmod 7$ <br>
+      $4 \times 2 = 8 \equiv 1$ 이므로 $y \equiv 2 \pmod 7$ 이다. <br>
+      즉, $y = 7k + 2$ 이며, 이를 원래 식에 대입하면 $7x + 11(7k+2) = 1$ <br>
+      $7x + 77k + 22 = 1 \implies 7x = -77k - 21 \implies x = -11k - 3$ <br>
+      $\therefore (x, y) = (-11k-3, 7k+2)$ (단, $k$는 정수)
+    </div>
+  </div>
+
+  <div class="footer">
+    합동식은 복잡한 정수 문제를 단순한 '나머지 바구니'에 담아 해결하게 해줍니다. <br>
+    © 2026 Number Theory Congruence Studies
+  </div>
+</div>
+</body>
+</html>

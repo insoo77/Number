@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 2.4 원시근과 모듈러 군 구조 예제</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f1f5f9; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#92400e; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #f59e0b; color:#78350f;}
+  .lead{
+    font-size:1.1rem; background:#fffbeb; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #f59e0b;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .status-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#fef3c7; color:#92400e;
+  }
+  .problem { font-weight: 700; color: #1e293b; font-size: 1.1rem; margin-bottom: 12px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .step-title { font-weight: 700; color: #d97706; margin-top: 10px; display: block; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>2.4 원시근 & 모듈러 군 구조 실전 예제 10선</h1>
+  <div class="lead">
+    원시근의 존재성, 위수(Order)의 성질, 그리고 모듈러 곱셈군 $(\mathbb{Z}/n\mathbb{Z})^\times$의 대수적 구조를 깊이 있게 탐구합니다.
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 1. 법 n에 대한 위수(Order)</div>
+    <div class="problem">문제: $\text{ord}_{13}(3)$의 값을 구하시오.</div>
+    <div class="solution">
+      $\phi(13) = 12$이므로 위수는 12의 약수($1, 2, 3, 4, 6, 12$) 중 하나이다. <br>
+      $3^1 \equiv 3$, $3^2 \equiv 9$, $3^3 \equiv 27 \equiv 1 \pmod{13}$ <br>
+      따라서 최소의 양의 정수 $k=3$이 존재하므로 $\text{ord}_{13}(3) = 3$. <br>
+      (참고: 위수가 $\phi(13)$보다 작으므로 3은 원시근이 아니다.)
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 2. 원시근 확인 절차</div>
+    <div class="problem">문제: 2가 법 11의 원시근임을 보이시오.</div>
+    <div class="solution">
+      $\phi(11) = 10$이다. 10의 소인수는 2와 5이므로, $2^{10/2} \not\equiv 1$ 및 $2^{10/5} \not\equiv 1 \pmod{11}$임을 확인하면 된다. <br>
+      1) $2^2 = 4 \not\equiv 1 \pmod{11}$ <br>
+      2) $2^5 = 32 \equiv 10 \equiv -1 \not\equiv 1 \pmod{11}$ <br>
+      위수가 10의 진약수가 아니므로 반드시 10이어야 한다. $\therefore$ 2는 원시근이다.
+    </div>
+  </div>
+
+  
+
+  <div class="example-box">
+    <div class="status-badge">Ex 3. 원시근의 개수 산출</div>
+    <div class="problem">문제: 법 17에 대한 원시근의 개수를 구하시오.</div>
+    <div class="solution">
+      법 $n$에 원시근이 존재하면 그 개수는 $\phi(\phi(n))$개이다. <br>
+      $\phi(17) = 16$ (17은 소수) <br>
+      $\phi(16) = 16(1 - 1/2) = 8$ <br>
+      따라서 법 17에 대한 원시근은 총 8개 존재한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 4. 위수의 변환 법칙</div>
+    <div class="problem">문제: $\text{ord}_n(a) = k$일 때, $\text{ord}_n(a^m) = k/\gcd(m, k)$ 임을 증명하시오.</div>
+    <div class="solution">
+      $x = \text{ord}_n(a^m)$이라 하자. $(a^m)^x \equiv a^{mx} \equiv 1 \pmod n$ 이 성립하려면 $k \mid mx$여야 한다. <br>
+      이는 $\frac{k}{\gcd(m,k)} \mid \frac{m}{\gcd(m,k)}x$ 와 동치이다. <br>
+      $\gcd(\frac{k}{\gcd(m,k)}, \frac{m}{\gcd(m,k)}) = 1$ 이므로, $\frac{k}{\gcd(m,k)} \mid x$ 가 성립한다. <br>
+      최소의 $x$는 $\frac{k}{\gcd(m,k)}$이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 5. 비순환군 $(\mathbb{Z}/8\mathbb{Z})^\times$</div>
+    <div class="problem">문제: 법 8은 원시근을 갖지 않음을 증명하시오.</div>
+    <div class="solution">
+      $(\mathbb{Z}/8\mathbb{Z})^\times = \{1, 3, 5, 7\}$ 이고 $\phi(8)=4$이다. <br>
+      $1^2 \equiv 1, 3^2 \equiv 9 \equiv 1, 5^2 \equiv 25 \equiv 1, 7^2 \equiv 49 \equiv 1 \pmod 8$. <br>
+      모든 원소의 위수가 최대 2이며, 위수가 4인 원소가 존재하지 않는다. <br>
+      따라서 법 8은 순환군이 아니며 원시근이 존재하지 않는다. (구조: $C_2 \times C_2$)
+    </div>
+  </div>
+
+  
+
+  <div class="example-box">
+    <div class="status-badge">Ex 6. 소수 법에 대한 해의 개수</div>
+    <div class="problem">문제: 소수 $p$에 대해 $x^d \equiv 1 \pmod p$ ($d \mid p-1$)의 해의 개수가 정확히 $d$개임을 보이시오.</div>
+    <div class="solution">
+      라그랑주 정리에 의해 $n$차 합동식의 해는 최대 $n$개이다. <br>
+      $p-1 = d \cdot k$라 하면, $x^{p-1}-1 = (x^d-1)(x^{d(k-1)} + \dots + 1)$이다. <br>
+      페르마의 소정리에 의해 $x^{p-1}-1 \equiv 0$은 $p-1$개의 해를 갖는다. <br>
+      만약 $x^d-1 \equiv 0$의 해가 $d$개보다 적다면, 전체 해의 개수가 $p-1$개가 될 수 없다. <br>
+      따라서 해의 개수는 정확히 $d$개이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 7. 원시근을 이용한 QR 판별</div>
+    <div class="problem">문제: $g$가 법 $p$의 원시근일 때, $a = g^k$가 이차잉여(QR)일 필요충분조건은 $k$가 짝수임을 보이시오.</div>
+    <div class="solution">
+      $\left( \frac{a}{p} \right) \equiv a^{(p-1)/2} \equiv (g^k)^{(p-1)/2} \equiv (g^{(p-1)/2})^k \pmod p$ <br>
+      오일러 판정법에 의해 $g^{(p-1)/2} \equiv -1$이므로 (원시근의 정의상 $1$일 수 없음), <br>
+      $\left( \frac{a}{p} \right) \equiv (-1)^k \pmod p$. <br>
+      $\therefore$ $k$가 짝수면 $1$ (QR), 홀수면 $-1$ (QNR)이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 8. 지수 계산</div>
+    <div class="problem">문제: 법 13의 원시근 2에 대해, $2^x \equiv 5 \pmod{13}$을 만족하는 $x$를 구하시오.</div>
+    <div class="solution">
+      2의 거듭제곱 나열: $2^1=2, 2^2=4, 2^3=8, 2^4=16 \equiv 3, 2^5=6, 2^6=12 \equiv -1, \dots$ <br>
+      $2^9 = 2^6 \cdot 2^3 \equiv -1 \cdot 8 = -8 \equiv 5 \pmod{13}$ <br>
+      $\therefore x = 9$. (이 $x$를 $ind_2(5)$라고도 부른다.)
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 9. 모든 원소의 곱</div>
+    <div class="problem">문제: 법 $n$에 원시근 $g$가 존재할 때, 기약잉여계 모든 원소의 곱은 $\pmod n$으로 얼마인가?</div>
+    <div class="solution">
+      원소들의 곱 $P \equiv g^1 \cdot g^2 \cdot \dots \cdot g^{\phi(n)} \equiv g^{\frac{\phi(n)(\phi(n)+1)}{2}} \pmod n$ <br>
+      $\phi(n)$이 짝수이므로($n>2$), 지수를 $k = \frac{\phi(n)}{2}(\phi(n)+1)$로 둔다. <br>
+      $P \equiv (g^{\phi(n)/2})^{\phi(n)+1} \equiv (-1)^{\text{odd}} \equiv -1 \pmod n$. <br>
+      이는 윌슨의 정리($ (p-1)! \equiv -1 \pmod p $)의 일반화된 형태이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 10. 소수의 거듭제곱과 원시근</div>
+    <div class="problem">문제: $g$가 법 $p$의 원시근일 때, $g^{p-1} \not\equiv 1 \pmod{p^2}$ 이면 $g$는 법 $p^k$의 원시근임을 설명하시오.</div>
+    <div class="solution">
+      $g$가 법 $p$의 원시근이면, 법 $p^2$에서의 위수는 $\phi(p)=p-1$ 또는 $\phi(p^2)=p(p-1)$이다. <br>
+      조건 $g^{p-1} \not\equiv 1 \pmod{p^2}$은 위수가 $p-1$이 아님을 보장하므로 위수는 $p(p-1)$이 된다. <br>
+      한번 $p^2$에서 원시근이 되면 수학적 귀납법에 의해 모든 $p^k$에서도 원시근이 됨이 알려져 있다.
+    </div>
+  </div>
+
+  <div class="footer">
+    원시근은 모듈러 세계의 무질서 속에 '순환'이라는 완벽한 질서를 부여합니다. <br>
+    © 2026 Number Theory: Primitive Root & Group Structure
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 2.1 산술 함수와 디리클레 합성 예제</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f1f5f9; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#4c1d95; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #8b5cf6; color:#5b21b6;}
+  .lead{
+    font-size:1.1rem; background:#f5f3ff; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #8b5cf6;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .status-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#ede9fe; color:#6d28d9;
+  }
+  .problem { font-weight: 700; color: #1e293b; font-size: 1.1rem; margin-bottom: 12px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .step-title { font-weight: 700; color: #7c3aed; margin-top: 10px; display: block; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>2.1 산술 함수 & 디리클레 합성 실전 예제 10선</h1>
+  <div class="lead">
+    함수 간의 합성($(f * g)(n)$)과 뫼비우스 반전 공식을 통해 복잡한 수론적 합을 단순화하는 기법을 익혀봅니다.
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 1. 항등함수 $\epsilon$의 성질</div>
+    <div class="problem">문제: $\epsilon(n) = [n=1]$ 일 때, 모든 산술 함수 $f$에 대해 $f * \epsilon = f$ 임을 보이시오.</div>
+    <div class="solution">
+      $(f * \epsilon)(n) = \sum_{d|n} f(d)\epsilon(n/d)$ 이다. <br>
+      $\epsilon(n/d)$는 $n/d = 1$, 즉 $d=n$일 때만 1이고 나머지는 0이다. <br>
+      따라서 합의 기호에서 $d=n$인 항만 남으므로: <br>
+      $(f * \epsilon)(n) = f(n) \cdot 1 = f(n)$ <br>
+      $\therefore f * \epsilon = f$
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 2. 가우스의 정리 ($\phi$의 합)</div>
+    <div class="problem">문제: $\sum_{d|n} \phi(d) = n$ 임을 증명하시오.</div>
+    <div class="solution">
+      $F(n) = \sum_{d|n} \phi(d)$라 하자. $\phi$가 곱셈적 함수이므로 $F$도 곱셈적이다. <br>
+      $n = p^k$ (소수의 거듭제곱)인 경우만 확인하면 된다. <br>
+      $F(p^k) = \phi(1) + \phi(p) + \phi(p^2) + \dots + \phi(p^k)$ <br>
+      $= 1 + (p-1) + (p^2-p) + \dots + (p^k - p^{k-1}) = p^k$ (망원급수 형태) <br>
+      모든 $n = \prod p_i^{e_i}$에 대해 $F(n) = \prod F(p_i^{e_i}) = \prod p_i^{e_i} = n$.
+    </div>
+  </div>
+
+  
+
+  <div class="example-box">
+    <div class="status-badge">Ex 3. $\mu$ 함수의 핵심 항등식</div>
+    <div class="problem">문제: $n > 1$ 일 때, $\sum_{d|n} \mu(d) = 0$ 임을 증명하시오.</div>
+    <div class="solution">
+      $n = p_1^{a_1} \dots p_k^{a_k}$라 하자. $\mu(d)$가 0이 아닌 경우는 $d$가 서로 다른 소수들의 곱일 때뿐이다. <br>
+      $\sum_{d|n} \mu(d) = \binom{k}{0} - \binom{k}{1} + \binom{k}{2} - \dots + (-1)^k \binom{k}{k}$ <br>
+      이항정리에 의해 이는 $(1-1)^k = 0$이다. <br>
+      (단, $n=1$이면 $\mu(1)=1$이다.)
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 4. $\tau$ 함수의 디리클레 표현</div>
+    <div class="problem">문제: $I(n)=1$인 상수함수일 때, $\tau = I * I$ 임을 보이시오.</div>
+    <div class="solution">
+      $(I * I)(n) = \sum_{d|n} I(d)I(n/d) = \sum_{d|n} 1 \cdot 1 = \sum_{d|n} 1$ <br>
+      어떤 수 $n$의 약수의 개수만큼 1을 더하는 것이므로 이는 $\tau(n)$의 정의와 일치한다. <br>
+      $\therefore \tau = I * I$
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 5. $\phi$ 함수와 $\mu$의 관계</div>
+    <div class="problem">문제: $\phi(n) = \sum_{d|n} \mu(d) \frac{n}{d}$ 임을 유도하시오.</div>
+    <div class="solution">
+      예제 2에서 $\sum_{d|n} \phi(d) = n$임을 보였다. <br>
+      이를 디리클레 합성으로 쓰면 $n = (\phi * I)(n)$이다. <br>
+      양변에 $\mu$를 디리클레 합성하면: <br>
+      $n * \mu = (\phi * I) * \mu = \phi * (I * \mu)$ <br>
+      $I * \mu = \epsilon$ (예제 3의 결과)이므로, $n * \mu = \phi * \epsilon = \phi$. <br>
+      $\therefore \phi(n) = \sum_{d|n} \mu(d) \frac{n}{d}$
+    </div>
+  </div>
+
+  
+
+  <div class="example-box">
+    <div class="status-badge">Ex 6. $\sigma$ 함수의 합성 표현</div>
+    <div class="problem">문제: $N(n)=n$인 항등함수일 때, $\sigma = N * I$ 임을 보이시오.</div>
+    <div class="solution">
+      $(N * I)(n) = \sum_{d|n} N(d)I(n/d) = \sum_{d|n} d \cdot 1 = \sum_{d|n} d$ <br>
+      이는 $n$의 모든 약수의 합이므로 $\sigma(n)$의 정의와 같다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 7. 완전 곱셈적 함수의 역원</div>
+    <div class="problem">문제: $f$가 완전 곱셈적 함수이면 $f^{-1}(n) = \mu(n)f(n)$ 임을 증명하시오.</div>
+    <div class="solution">
+      $(f * (\mu f))(n) = \sum_{d|n} f(d)\mu(n/d)f(n/d)$ <br>
+      $f$가 완전 곱셈적이므로 $f(d)f(n/d) = f(n)$이다. <br>
+      $= f(n) \sum_{d|n} \mu(n/d) = f(n) \sum_{d|n} \mu(d)$ <br>
+      $n=1$이면 $f(1)\mu(1)=1$, $n>1$이면 $f(n) \cdot 0 = 0$. <br>
+      이는 $\epsilon(n)$의 정의와 같으므로 $\mu f$는 $f$의 디리클레 역원이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 8. $\mu^2$ 함수의 의미</div>
+    <div class="problem">문제: $f(n) = \mu^2(n)$ 일 때, $\sum_{d^2|n} \mu(d)$의 값을 구하시오.</div>
+    <div class="solution">
+      $\mu^2(n)$은 $n$이 제곱인수를 갖지 않으면 1, 갖으면 0이다(Square-free indicator). <br>
+      정리: $\mu^2(n) = \sum_{d^2|n} \mu(d)$. <br>
+      이 식은 $n$을 소인수분해하여 각 지수가 2 이상인 경우 $\mu$의 성질에 의해 상쇄됨을 보임으로써 증명 가능하다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 9. 리우빌 함수와 $\mu$</div>
+    <div class="problem">문제: 리우빌 함수 $\lambda(n) = (-1)^{\Omega(n)}$에 대해 $\sum_{d|n} \lambda(d)$의 값을 구하시오.</div>
+    <div class="solution">
+      $\lambda$는 완전 곱셈적 함수이다. $F = \lambda * I$라 하면 $F$는 곱셈적이다. <br>
+      $F(p^k) = \sum_{i=0}^k \lambda(p^i) = \sum_{i=0}^k (-1)^i$ <br>
+      이는 $k$가 짝수면 1, 홀수면 0이다. <br>
+      $\therefore \sum_{d|n} \lambda(d) = 1$ ($n$이 완전제곱수일 때), $0$ (그 외).
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 10. $\phi(n)/n$의 평균값 관련 합</div>
+    <div class="problem">문제: $\sum_{d|n} \frac{\mu(d)}{d}$를 $\phi(n)$으로 표현하시오.</div>
+    <div class="solution">
+      예제 5에서 $\phi(n) = n \sum_{d|n} \frac{\mu(d)}{d}$임을 유도했다. <br>
+      $\therefore \sum_{d|n} \frac{\mu(d)}{d} = \frac{\phi(n)}{n}$ <br>
+      이는 확률론적으로 $n$ 이하의 임의의 수가 $n$과 서로소일 확률과 연관된다.
+    </div>
+  </div>
+
+  <div class="footer">
+    산술 함수와 디리클레 합성은 정수의 세계를 함수들의 대수적 춤으로 바꾸어 놓습니다. <br>
+    © 2026 Number Theory: Arithmetic Function Studies
+  </div>
+</div>
+</body>
+</html>

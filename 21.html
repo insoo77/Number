@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 2.1 산술 함수와 디리클레 합성</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#1e1b4b; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #8b5cf6; color:#4c1d95;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #8b5cf6; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#f5f3ff,#ede9fe);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #8b5cf6;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-card {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#ede9fe; color:#6d28d9;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>2.1 산술 함수 (Arithmetic Functions)</h1>
+  <div class="lead">
+    산술 함수는 모든 양의 정수 집합을 정의역으로 하는 복소함수입니다. 이들은 수의 구조적 성질을 수치화하며, 특히 <b>곱셈적 함수(Multiplicative Functions)</b>는 소인수분해의 유일성과 결합하여 강력한 위력을 발휘합니다.
+  </div>
+
+  <h2>1. 주요 산술 함수</h2>
+  <div class="concept-card">
+    <div class="badge">약수 함수 (Divisor Function)</div>
+    <p>$\sigma_k(n)$은 $n$의 모든 양의 약수의 $k$차 거듭제곱의 합을 나타냅니다.</p>
+    <ul>
+      <li>$\tau(n) = \sigma_0(n)$: 약수의 개수</li>
+      <li>$\sigma(n) = \sigma_1(n)$: 약수의 총합</li>
+    </ul>
+
+    <div class="badge">오일러 파이 함수 (Euler's Phi Function)</div>
+    <p>$\phi(n)$은 $1 \le k \le n$인 정수 중 $n$과 서로소인 수의 개수입니다.</p>
+    <div class="formula-container">
+      $$\phi(n) = n \prod_{p|n} \left(1 - \frac{1}{p}\right)$$
+    </div>
+  </div>
+
+  
+
+  <h2>2. 뫼비우스 함수 (Möbius Function)</h2>
+  <div class="concept-card">
+    <p>뫼비우스 함수 $\mu(n)$은 다음과 같이 정의되며, 뫼비우스 반전 공식의 핵심입니다.</p>
+    <div class="formula-container" style="background:#4c1d95;">
+      $$\mu(n) = \begin{cases} 1 & \text{if } n=1 \\ (-1)^k & \text{if } n \text{ is the product of } k \text{ distinct primes} \\ 0 & \text{if } n \text{ has a squared prime factor} \end{cases}$$
+    </div>
+    <p>주요 성질: $\sum_{d|n} \mu(d) = [n=1]$ (크로네커 델타와 유사한 역할)</p>
+  </div>
+
+  <h2>3. 디리클레 합성 (Dirichlet Convolution)</h2>
+  <p>두 산술 함수 $f$와 $g$를 결합하여 새로운 함수를 만드는 연산입니다.</p>
+  <div class="concept-card" style="border-left: 5px solid #8b5cf6;">
+    <div class="formula-container">
+      $$(f * g)(n) = \sum_{d|n} f(d) g(n/d)$$
+    </div>
+    <div class="badge">Properties</div>
+    <ul>
+      <li><b>교환법칙:</b> $f * g = g * f$</li>
+      <li><b>결합법칙:</b> $(f * g) * h = f * (g * h)$</li>
+      <li><b>항등원:</b> $\epsilon(n) = [n=1]$ 에 대해 $f * \epsilon = f$</li>
+      <li><b>곱셈적 성질 보존:</b> $f, g$가 곱셈적 함수이면 $f * g$도 곱셈적입니다.</li>
+    </ul>
+  </div>
+
+  
+
+  <h2>4. 뫼비우스 반전 공식 (Möbius Inversion Formula)</h2>
+  <div class="concept-card">
+    <p>두 함수 $f$와 $F$ 사이의 관계를 역으로 계산할 수 있게 해줍니다.</p>
+    <div class="formula-container">
+      $$F(n) = \sum_{d|n} f(d) \iff f(n) = \sum_{d|n} F(d) \mu(n/d)$$
+    </div>
+    <p>이를 디리클레 합성 기호로 쓰면 매우 간단해집니다: $F = f * I \iff f = F * \mu$ (단, $I(n)=1$)</p>
+  </div>
+
+  <div class="footer">
+    디리클레 합성은 산술 함수들의 대수적 구조를 이해하는 가장 세련된 방법입니다. <br>
+    © 2026 Number Theory: Arithmetic & Dirichlet Studies
+  </div>
+</div>
+</body>
+</html>

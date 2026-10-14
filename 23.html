@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>정수론 - 2.2 분할과 조합적 정수론</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#1e1b4b; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #ec4899; color:#831843;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #ec4899; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#fdf2f8,#fce7f3);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #ec4899;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-card {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#fce7f3; color:#be185d;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>2.2 분할과 조합적 정수론</h1>
+  <div class="lead">
+    정수 분할은 대상을 나누는 '방법'의 개수를 세는 학문입니다. 오일러는 무한급수와 무한곱을 연결하는 <b>생성함수</b>를 도입하여, 복잡한 조합론적 문제를 대수적인 전개식으로 변환했습니다.
+  </div>
+
+  <h2>1. 정수 분할 (Partition of Integers)</h2>
+  <div class="concept-card">
+    <p>정수 $n$의 분할이란 $n$을 양의 정수들의 합으로 나타내는 방법이며, 합의 순서는 고려하지 않습니다. 이를 $p(n)$으로 표기합니다.</p>
+    <p><b>예시: $p(4) = 5$</b></p>
+    <ul>
+      <li>4</li>
+      <li>3 + 1</li>
+      <li>2 + 2</li>
+      <li>2 + 1 + 1</li>
+      <li>1 + 1 + 1 + 1</li>
+    </ul>
+  </div>
+
+  
+
+  <h2>2. 생성함수 (Generating Functions)</h2>
+  <div class="concept-card">
+    <p>수열 $\{p(n)\}$의 성질을 분석하기 위해, 이 수열을 계수로 갖는 멱급수를 정의합니다. 오일러는 다음과 같은 아름다운 무한곱 형태를 발견했습니다.</p>
+    <div class="formula-container" style="background:#831843;">
+      $$\sum_{n=0}^{\infty} p(n)x^n = \prod_{k=1}^{\infty} \frac{1}{1-x^k}$$
+    </div>
+    <p>이 식의 우변을 전개하면 $x^n$의 계수가 정확히 $n$을 분할하는 방법의 수와 일치하게 됩니다.</p>
+  </div>
+
+  <h2>3. 페러스 도표 (Ferrers Diagram)와 공액 분할</h2>
+  <div class="concept-card" style="border-left: 5px solid #ec4899;">
+    <p>분할을 점의 배열로 시각화한 것을 <b>페러스 도표</b>라고 합니다. 도표를 행과 열을 바꾸어(전치) 얻는 분할을 <b>공액 분할(Conjugate Partition)</b>이라 부릅니다.</p>
+    <div class="badge">Theorem</div>
+    <p>"$n$을 최대 $k$개의 항으로 분할하는 방법의 수"는 "$n$을 $k$ 이하의 항들로만 분할하는 방법의 수"와 같습니다. (도표의 대칭성을 통해 자명하게 증명됨)</p>
+  </div>
+
+  <h2>4. 오일러의 오각수 정리 (Pentagonal Number Theorem)</h2>
+  <p>분할 함수 $p(n)$을 효율적으로 계산하기 위한 재귀식의 기초가 됩니다.</p>
+  <div class="formula-container">
+    $$\prod_{k=1}^{\infty} (1-x^k) = \sum_{n=-\infty}^{\infty} (-1)^n x^{n(3n-1)/2} = 1 - x - x^2 + x^5 + x^7 - \dots$$
+  </div>
+
+  <div class="footer">
+    분할론은 오일러에서 시작되어 하디, 리틀우드, 라마누잔을 거쳐 현대의 모듈러 형식 이론으로 이어집니다. <br>
+    © 2026 Combinatorial Number Theory Studies
+  </div>
+</div>
+</body>
+</html>
